@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-08-31 14:51+0900\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Last-Translator: \n"
+
+msgid "Add the value of the option. and Available for use in the post article."
+msgstr ""
+
+msgid "Customs Option"
+msgstr ""
+
+msgid "Create an option"
+msgstr ""
+
+msgid "Japanese available use."
+msgstr ""
+
+msgid "Option Name"
+msgstr ""
+
+msgid "Option Value"
+msgstr ""
+
+msgid "Usable Javascript and Html tag."
+msgstr ""
+
+msgid "Option name is duplicated."
+msgstr ""
+
+msgid "List of options that you created"
+msgstr ""
+
+msgid "Not created option."
+msgstr ""
+
+msgid "Tag of the template"
+msgstr ""
+
+msgid "Tag of the post"
+msgstr ""
