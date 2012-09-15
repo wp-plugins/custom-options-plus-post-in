@@ -1,0 +1,22 @@
+form#coppi_form textarea {
+	width: 90%;
+}
+
+form#coppi_form div#update table td.short-tag {
+	width: 20%;
+}
+form#coppi_form div#update table td.template-tag {
+	width: 40%;
+}
+form#coppi_form div#update table td.operation {
+	width: 10%;
+}
+form#coppi_form div#Confirm {
+	display: none;
+}
+div#ConfirmSt a#cancelbtn {
+	float: left;
+}
+div#ConfirmSt a#deletebtn {
+	float: right;
+}
