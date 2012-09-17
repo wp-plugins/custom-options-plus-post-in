@@ -3,8 +3,8 @@ Contributors: gqevu6bsiz
 Donate link: 
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.1
-Tested up to: 3.4.1
-Stable tag: 1.0.0
+Tested up to: 3.4.2
+Stable tag: 1.0.1
 License: GPL2
 
 Add the value of the option. and Available for use in the post article.
@@ -24,10 +24,6 @@ Short code can be used in the body of the article.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
-
-= What about foo bar? =
-
 == Screenshots ==
 
 1. Interface in setting
@@ -36,12 +32,16 @@ Short code can be used in the body of the article.
 
 == Changelog ==
 
+= 1.0.1 =
+Fixed the translation.
+
 = 1.0 =
 This is the initial release.
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.1 =
+Fixed the translation.
 
 == 日本語でのご説明 ==
 
