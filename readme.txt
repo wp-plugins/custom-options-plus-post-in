@@ -3,8 +3,8 @@ Contributors: gqevu6bsiz
 Donate link: 
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.1
-Tested up to: 3.4.2
-Stable tag: 1.0.1
+Tested up to: 3.5
+Stable tag: 1.0.2
 License: GPL2
 
 Add the value of the option. and Available for use in the post article.
@@ -31,6 +31,9 @@ Short code can be used in the body of the article.
 3. Display cases
 
 == Changelog ==
+
+= 1.0.2 =
+I've changed the readme.txt.
 
 = 1.0.1 =
 Fixed the translation.

@@ -3,7 +3,7 @@
 Plugin Name: Custom Options Plus Post In
 Description: Add the value of the option. and Available for use in the post article.
 Plugin URI: http://gqevu6bsiz.chicappa.jp
-Version: 1.0.1
+Version: 1.0.2
 Author: gqevu6bsiz
 Author URI: http://gqevu6bsiz.chicappa.jp/author/admin/
 Text Domain: custom_options_plus_post_in
@@ -28,7 +28,7 @@ Domain Path: /languages
 
 load_plugin_textdomain('custom_options_plus_post_in', false, basename(dirname(__FILE__)).'/languages');
 
-define ('COPPI_VER', '1.0.1');
+define ('COPPI_VER', '1.0.2');
 define ('COPPI_PLUGIN_NAME', __('Customs Option', 'custom_options_plus_post_in'));
 define ('COPPI_SHORT_NAME', 'coppi');
 define ('COPPI_MANAGE_URL', admin_url('options-general.php').'?page=coppi');
