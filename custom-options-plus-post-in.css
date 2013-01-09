@@ -2,13 +2,19 @@ form#coppi_form textarea {
 	width: 90%;
 }
 
-form#coppi_form div#update table td.short-tag {
+form#coppi_form div#update table th.create-date {
+	width: 10%;
+}
+form#coppi_form div#update table th.option-name {
+	width: 10%;
+}
+form#coppi_form div#update table th.shortcode {
 	width: 20%;
 }
-form#coppi_form div#update table td.template-tag {
-	width: 40%;
+form#coppi_form div#update table th.template-tag {
+	width: 20%;
 }
-form#coppi_form div#update table td.operation {
+form#coppi_form div#update table th.operation {
 	width: 10%;
 }
 form#coppi_form div#Confirm {

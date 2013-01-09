@@ -2,9 +2,9 @@
 Contributors: gqevu6bsiz
 Donate link: 
 Tags: admin, option, shortcode, post, custom, template
-Requires at least: 3.4.1
+Requires at least: 3.4.2
 Tested up to: 3.5
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPL2
 
 Add the value of the option. and Available for use in the post article.
@@ -32,6 +32,9 @@ Short code can be used in the body of the article.
 
 == Changelog ==
 
+= 1.1 =
+It is now possible to sort.
+
 = 1.0.2 =
 I've changed the readme.txt.
 
@@ -50,4 +53,4 @@ Fixed the translation.
 
 このプラグインは、オプションの値を追加できるようにするプラグインです。
 作成したオプション値は、テンプレートで使用でき、
-記事本文でショートコードを用いても使用できます。
+記事本文でショートコードとしても使用できます。

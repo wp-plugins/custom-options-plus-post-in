@@ -3,7 +3,7 @@
 Plugin Name: Custom Options Plus Post In
 Description: Add the value of the option. and Available for use in the post article.
 Plugin URI: http://gqevu6bsiz.chicappa.jp
-Version: 1.0.2
+Version: 1.1
 Author: gqevu6bsiz
 Author URI: http://gqevu6bsiz.chicappa.jp/author/admin/
 Text Domain: custom_options_plus_post_in
@@ -28,7 +28,7 @@ Domain Path: /languages
 
 load_plugin_textdomain('custom_options_plus_post_in', false, basename(dirname(__FILE__)).'/languages');
 
-define ('COPPI_VER', '1.0.2');
+define ('COPPI_VER', '1.1');
 define ('COPPI_PLUGIN_NAME', __('Customs Option', 'custom_options_plus_post_in'));
 define ('COPPI_SHORT_NAME', 'coppi');
 define ('COPPI_MANAGE_URL', admin_url('options-general.php').'?page=coppi');
@@ -79,7 +79,11 @@ function coppi_setting() {
 			$Update = array();
 			if(!empty($_POST["update"])) {
 				foreach ($_POST["update"] as $key => $val) {
-					$Update[$key] = array("key" => $val["key"], "val" => $val["val"]);
+					if( !empty( $val["create_date"] ) ) {
+						$Update[$key] = array("key" => $val["key"], "val" => $val["val"], "create_date" => $val["create_date"]);
+					} else {
+						$Update[$key] = array("key" => $val["key"], "val" => $val["val"], "create_date" => gmdate('Y-m-d H:i:s'));
+					}
 				}
 			}
 			if(!empty($_POST["create"]) && !empty($_POST["create"]["key"])) {
@@ -91,7 +95,7 @@ function coppi_setting() {
 					}
 				}
 				if($duplicated == false) {
-					$Update[] = array("key" => strip_tags($_POST["create"]["key"]), "val" => $_POST["create"]["value"]);
+					$Update[] = array("key" => strip_tags($_POST["create"]["key"]), "val" => $_POST["create"]["value"], "create_date" => gmdate('Y-m-d H:i:s'));
 				}
 			}
 			
@@ -104,8 +108,11 @@ function coppi_setting() {
 		}
 	}
 	
+	// sort
+	$Order = coppi_manage_order();
+	
 	// get data
-	$Data = get_option(COPPI_RECORD_NAME);
+	$Data = get_coppi_recoard( $Order );
 	
 	// include js css
 	$ReadedJs = array('jquery', 'thickbox');
@@ -157,16 +164,57 @@ function coppi_setting() {
 				<table cellspacing="0" class="widefat fixed">
 					<thead>
 						<tr>
-							<th><?php _e('Option Name', 'custom_options_plus_post_in'); ?></th>
-							<th><?php _e('Option Value', 'custom_options_plus_post_in'); ?></th>
+							<?php $Cls = 'sortable asc'; $Od = 'asc'; ?>
+							<?php if( $Order["orderby"] == "create_date" ) : ?>
+								<?php $Cls = 'sorted ' . $Order["order"]; ?>
+								<?php if( $Order["order"] == 'asc' ) : ?>
+									<?php $Od = 'desc'; ?>
+								<?php endif; ?>
+							<?php endif; ?>
+							<th class="create-date <?php echo $Cls; ?>">
+								<a href="<?php echo esc_url( add_query_arg( array( "orderby" => "create_date" , "order" => $Od ) , COPPI_MANAGE_URL ) ); ?>">
+									<span><?php _e('Create Date', 'custom_options_plus_post_in'); ?></span>
+									<span class="sorting-indicator"></span>
+								</a>
+							</th>
+							<?php $Cls = 'sortable asc'; $Od = 'asc'; ?>
+							<?php if( $Order["orderby"] == "option_name" ) : ?>
+								<?php $Cls = 'sorted ' . $Order["order"]; ?>
+								<?php if( $Order["order"] == 'asc' ) : ?>
+									<?php $Od = 'desc'; ?>
+								<?php endif; ?>
+							<?php endif; ?>
+							<th class="option-name <?php echo $Cls; ?>">
+								<a href="<?php echo esc_url( add_query_arg( array( "orderby" => "option_name" , "order" => $Od ) , COPPI_MANAGE_URL ) ); ?>">
+									<span><?php _e('Option Name', 'custom_options_plus_post_in'); ?></span>
+									<span class="sorting-indicator"></span>
+								</a>
+							</th>
+							<?php $Cls = 'sortable asc'; $Od = 'asc'; ?>
+							<?php if( $Order["orderby"] == "option_value" ) : ?>
+								<?php $Cls = 'sorted ' . $Order["order"]; ?>
+								<?php if( $Order["order"] == 'asc' ) : ?>
+									<?php $Od = 'desc'; ?>
+								<?php endif; ?>
+							<?php endif; ?>
+							<th class="option-value <?php echo $Cls; ?>">
+								<a href="<?php echo esc_url( add_query_arg( array( "orderby" => "option_value" , "order" => $Od ) , COPPI_MANAGE_URL ) ); ?>">
+									<span><?php _e('Option Value', 'custom_options_plus_post_in'); ?></span>
+									<span class="sorting-indicator"></span>
+								</a>
+							</th>
 							<th class="template-tag"><?php _e('Tag of the template', 'custom_options_plus_post_in'); ?></th>
-							<th class="short-tag"><?php _e('Tag of the post', 'custom_options_plus_post_in'); ?></th>
+							<th class="shortcode"><?php _e('Shortcode', 'custom_options_plus_post_in'); ?></th>
 							<th class="operation">&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php foreach($Data as $key => $content) : ?>
 							<tr id="tr_<?php echo $key; ?>">
+								<td class="create-date">
+									<input type="text" value="<?php echo strip_tags($content["create_date"]); ?>" name="<?php echo $type; ?>[<?php echo $key; ?>][create_date]" />
+									<span><?php echo strip_tags($content["create_date"]); ?></span>
+								</td>
 								<td class="key">
 									<input type="text" value="<?php echo strip_tags($content["key"]); ?>" name="<?php echo $type; ?>[<?php echo $key; ?>][key]">
 									<span><?php echo strip_tags($content["key"]); ?></span>
@@ -178,7 +226,7 @@ function coppi_setting() {
 								<td class="template-tag">
 									<code>&lt;?php echo get_coppi('<?php echo esc_html($content["key"]); ?>'); ?&gt;</code>
 								</td>
-								<td class="short-tag">
+								<td class="shortcode">
 									<code>[<?php echo COPPI_SHORT_NAME; ?> key="<?php echo esc_html($content["key"]); ?>"]</code>
 								</td>
 								<td class="operation">
@@ -236,6 +284,73 @@ jQuery(document).ready(function($) {
 </div>
 <?php
 }
+
+
+
+// sort
+function coppi_manage_order() {
+	// default
+	$Order = array( "orderby" => "create_date" , "order" => "asc" );
+
+	if ( !empty( $_GET['orderby'] ) ) {
+		if ( $_GET['orderby'] == 'create_date' or $_GET['orderby'] == 'option_name' or $_GET['orderby'] == 'option_value' ) {
+
+			$Order["orderby"] = $_GET['orderby'];
+
+			if ( $_GET['order'] == 'asc' or $_GET['order'] == 'desc' ) {
+
+				$Order["order"] = $_GET['order'];
+
+			}
+			
+		}
+	}
+
+	return $Order;
+}
+
+
+
+// get data
+function get_coppi_recoard( $Order ) {
+	$GetData = get_option(COPPI_RECORD_NAME);
+
+	$Data = array();
+	if( !empty( $GetData ) ) {
+
+		$sort = array();
+		foreach($GetData as $key => $val){
+			
+			if( empty( $val["create_date"] ) ) {
+				$GetData[$key]["create_date"] = gmdate('Y-m-d H:i:s');
+			}
+			
+			if( $Order["orderby"] == 'option_name' ) {
+				$sort[$key] = $val["key"];
+			} elseif( $Order["orderby"] == 'option_value' ) {
+				$sort[$key] = $val["val"];
+			} else {
+				if( $Order["orderby"] == 'create_date' ) {
+					$sort[$key] = $val["create_date"];
+				} else {
+					$sort[$key] = $key;
+				}
+			}
+		}
+		
+		$sort_type = SORT_ASC;
+		if( !empty( $Order["order"] ) && $Order["order"] == 'desc' ) {
+			$sort_type = SORT_DESC;
+		}
+		array_multisort( $sort , $sort_type , $GetData );
+
+		$Data = $GetData;
+	}
+	
+	return $Data;
+}
+
+
 
 
 
