@@ -3,7 +3,7 @@
 Plugin Name: Custom Options Plus Post In
 Description: Add the value of the option. and Available for use in the post article.
 Plugin URI: http://gqevu6bsiz.chicappa.jp
-Version: 1.1
+Version: 1.1.1
 Author: gqevu6bsiz
 Author URI: http://gqevu6bsiz.chicappa.jp/author/admin/
 Text Domain: custom_options_plus_post_in
@@ -28,7 +28,7 @@ Domain Path: /languages
 
 load_plugin_textdomain('custom_options_plus_post_in', false, basename(dirname(__FILE__)).'/languages');
 
-define ('COPPI_VER', '1.1');
+define ('COPPI_VER', '1.1.1');
 define ('COPPI_PLUGIN_NAME', __('Customs Option', 'custom_options_plus_post_in'));
 define ('COPPI_SHORT_NAME', 'coppi');
 define ('COPPI_MANAGE_URL', admin_url('options-general.php').'?page=coppi');
@@ -319,10 +319,11 @@ function get_coppi_recoard( $Order ) {
 	if( !empty( $GetData ) ) {
 
 		$sort = array();
+		$now = gmdate('Y-m-d H:i:s');
 		foreach($GetData as $key => $val){
 			
 			if( empty( $val["create_date"] ) ) {
-				$GetData[$key]["create_date"] = gmdate('Y-m-d H:i:s');
+				$GetData[$key]["create_date"] = $now;
 			}
 			
 			if( $Order["orderby"] == 'option_name' ) {
@@ -330,7 +331,7 @@ function get_coppi_recoard( $Order ) {
 			} elseif( $Order["orderby"] == 'option_value' ) {
 				$sort[$key] = $val["val"];
 			} else {
-				if( $Order["orderby"] == 'create_date' ) {
+				if( !empty( $val["create_date"] ) && $Order["orderby"] == 'create_date' ) {
 					$sort[$key] = $val["create_date"];
 				} else {
 					$sort[$key] = $key;
