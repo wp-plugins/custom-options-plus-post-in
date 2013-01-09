@@ -1,0 +1,28 @@
+form#coppi_form textarea {
+	width: 90%;
+}
+
+form#coppi_form div#update table th.create-date {
+	width: 10%;
+}
+form#coppi_form div#update table th.option-name {
+	width: 10%;
+}
+form#coppi_form div#update table th.shortcode {
+	width: 20%;
+}
+form#coppi_form div#update table th.template-tag {
+	width: 20%;
+}
+form#coppi_form div#update table th.operation {
+	width: 10%;
+}
+form#coppi_form div#Confirm {
+	display: none;
+}
+div#ConfirmSt a#cancelbtn {
+	float: left;
+}
+div#ConfirmSt a#deletebtn {
+	float: right;
+}
