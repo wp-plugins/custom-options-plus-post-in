@@ -3,7 +3,7 @@ Contributors: gqevu6bsiz
 Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
-Tested up to: 3.5
+Tested up to: 3.5.1
 Stable tag: 1.2
 License: GPL2
 
