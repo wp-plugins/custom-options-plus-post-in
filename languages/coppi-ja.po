@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-03-07 18:37+0900\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Last-Translator: \n"
+
+msgid "Add the value of the option. and Available for use in the post article."
+msgstr "オプション値の追加。そして記事投稿にも使用できます。"
+
+msgid "Donation"
+msgstr "寄付のお願い"
+
+msgid "Plugin About"
+msgstr "プラグインについて"
+
+msgid "Please donation."
+msgstr "寄付のお願い"
+
+msgid "When you are satisfied with my plugin,<br />I'm want a gift card.<br />Thanks!"
+msgstr "あなたがこのプラグインに満足できたら、私にギフトカードをプレゼントして欲しいです。<br />よろしくお願いします。"
+
+msgid "Other"
+msgstr "その他"
+
+msgid "Customs Option"
+msgstr "オプション カスタム"
+
+msgid "Create an option"
+msgstr "オプションを作成"
+
+msgid "Option Name"
+msgstr "オプション名"
+
+msgid "Option Value"
+msgstr "オプションの値"
+
+msgid "Usable Javascript and Html tag."
+msgstr "Javascript と HTMLタグ使用可能です。"
+
+msgid "Please enter a value that does not duplicated."
+msgstr "重複しない値を入力してください。"
+
+msgid "Option name is duplicated."
+msgstr "オプション名が重複しています。"
+
+msgid "List of options that you created"
+msgstr "作成したオプション一覧"
+
+msgid "Not created option."
+msgstr "作成されたオプションはありません"
+
+msgid "Create Date"
+msgstr "作成日"
+
+msgid "Tag of the template"
+msgstr "テンプレートで使うタグ"
+
+msgid "Shortcode"
+msgstr "記事本文で使うショートコード"
+
