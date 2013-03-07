@@ -1,27 +1,42 @@
 jQuery(document).ready(function($) {
 
-	var $Form = $("#coppi_form");
-	
-	// create submit
-	$("p.submit input:button").click(function() {
-		$Form.submit();
+	// update table
+	var $UpdateTable = $(".update_table");
+	var $UpdateTr = $("table tbody tr" , $UpdateTable );
+
+
+	// delete 
+	$("a.delete" , $UpdateTable ).click(function() {
+		var $ConfDlg = $("#Confirm #ConfirmSt" , $UpdateTable );
+
+		var $DelUrl = $(this).attr("href");
+		$( "a#deletebtn" , $ConfDlg ).attr( "href" , $DelUrl );
+
+		var $DelName = $(this).parent().parent().parent().parent().children('td.option_name').children('div.on').text();
+		$( ".inner" , $ConfDlg ).children('p').children('strong').text( $DelName );
+
+		var $DelTitle = $(this).attr("title");
+		tb_show( $DelTitle , '#TB_inline?height=100&width=240&inlineId=Confirm' , '' );
+
+		
+		
+		return false;
 	});
 
-	// update
-	var $UpdateTr = $Form.children("div#update").children("table").children("tbody").children("tr");
-	$UpdateTr.children("td.create-date").children("input").hide();
-	$UpdateTr.children("td.key").children("input").hide();
-	$UpdateTr.children("td.val").children("textarea").hide();
-	$UpdateTr.children("td.operation").children("p.submit").hide();
+	$("a#cancelbtn").click(function() {
+		tb_remove();
+	});
 
-	$UpdateTr.children("td.operation").children("span").children("a.edit").click(function() {
-		var $ParentTr = $(this).parent().parent().parent();
-		$ParentTr.children("td.create-date").children("input").val('');
-		$ParentTr.children("td.val").children("span").hide();
-		$ParentTr.children("td.val").children("textarea").show();
-		$(this).parent().hide();
-		$(this).parent().parent().children("p.submit").show();
-		
+	// edit
+	$( "a.edit" , $UpdateTr ).click(function() {
+		var $ParentTr = $(this).parent().parent().parent().parent();
+		$ParentTr.children("td").each(function() {
+			if( 0 < $(".on" , this).size() ) {
+				$(".on" , this).hide();
+				$(".off" , this).show();
+			}
+		});
+
 		return false;
 	});
 

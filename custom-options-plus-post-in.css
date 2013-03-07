@@ -1,28 +1,60 @@
-form#coppi_form textarea {
+.columns-2 #postbox-container-1 {
+	width: 60%;
+}
+.columns-2 #postbox-container-2 {
+	width: 38%;
+	margin-left: 2%;
+}
+.postbox .hndle {
+	cursor: default; 	
+}
+
+
+
+
+
+form#coppi_create textarea {
 	width: 90%;
 }
 
-form#coppi_form div#update table th.create-date {
+
+
+
+
+.update_table table thead th.create_date {
 	width: 10%;
 }
-form#coppi_form div#update table th.option-name {
-	width: 10%;
-}
-form#coppi_form div#update table th.shortcode {
+.update_table table thead th.option_name {
 	width: 20%;
 }
-form#coppi_form div#update table th.template-tag {
+.update_table table thead th.shortcode {
 	width: 20%;
 }
-form#coppi_form div#update table th.operation {
+.update_table table thead th.template_tag {
+	width: 20%;
+}
+.update_table table thead th.operation {
 	width: 10%;
 }
-form#coppi_form div#Confirm {
+
+
+.update_table table tbody td .off {
 	display: none;
 }
-div#ConfirmSt a#cancelbtn {
-	float: left;
+.update_table table tbody td.option_name input,
+.update_table table tbody td.option_value textarea {
+	width: 100%;
 }
-div#ConfirmSt a#deletebtn {
-	float: right;
+.update_table table tbody td.operation {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+
+
+
+
+
+.update_table div#Confirm {
+	display: none;
 }

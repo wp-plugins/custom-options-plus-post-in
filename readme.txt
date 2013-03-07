@@ -1,10 +1,10 @@
 === CUSTOM OPTIONS PLUS POST IN ===
 Contributors: gqevu6bsiz
-Donate link: 
+Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
 Tested up to: 3.5
-Stable tag: 1.1.1
+Stable tag: 1.2
 License: GPL2
 
 Add the value of the option. and Available for use in the post article.
@@ -24,6 +24,7 @@ Short code can be used in the body of the article.
 
 == Frequently Asked Questions ==
 
+
 == Screenshots ==
 
 1. Interface in setting
@@ -32,7 +33,11 @@ Short code can be used in the body of the article.
 
 == Changelog ==
 
-= 1.1 =
+= 1.2 =
+I've changed the format for storing data.
+contains information about the plugin author.
+
+= 1.1.1 =
 Update the date of creation date bug.
 
 = 1.1 =
