@@ -4,7 +4,7 @@ Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
 Tested up to: 3.5.1
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPL2
 
 Add the value of the option. and Available for use in the post article.
@@ -32,6 +32,9 @@ Short code can be used in the body of the article.
 3. Display cases
 
 == Changelog ==
+
+= 1.2.1 =
+Create a table of only plugin activated.
 
 = 1.2 =
 I've changed the format for storing data.

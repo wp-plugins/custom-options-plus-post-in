@@ -3,9 +3,9 @@
 Plugin Name: Custom Options Plus Post In
 Description: Add the value of the option. and Available for use in the post article.
 Plugin URI: http://gqevu6bsiz.chicappa.jp
-Version: 1.2
+Version: 1.2.1
 Author: gqevu6bsiz
-Author URI: http://gqevu6bsiz.chicappa.jp/author/admin/
+Author URI: http://gqevu6bsiz.chicappa.jp/
 Text Domain: coppi
 Domain Path: /languages
 */
@@ -52,7 +52,7 @@ class Custom_Options_Plus_Post_In
 
 		global $wpdb;
 
-		$this->Ver = '1.2';
+		$this->Ver = '1.2.1';
 		$this->DBVer = '1.0';
 		$this->Name = 'Custom Options Plus Post In';
 		$this->Dir = WP_PLUGIN_URL . '/' . dirname( plugin_basename( __FILE__ ) ) . '/';
@@ -80,7 +80,7 @@ class Custom_Options_Plus_Post_In
 		add_action( 'admin_menu' , array( $this , 'admin_menu' ) , 2 );
 		
 		// setup database
-		add_action( 'plugins_loaded' , array( $this , 'Setup_DB' ) );
+		register_activation_hook( __FILE__ , array( $this , 'Setup_DB' ) );
 	}
 
 	// PluginSetup
@@ -201,7 +201,7 @@ class Custom_Options_Plus_Post_In
 	// GetData
 	function get_datas() {
 		global $wpdb;
-		
+
 		$GetData = $wpdb->get_results( "SELECT * FROM " . $this->Table . " ORDER BY " . $this->Order["orderby"] . " " . $this->Order["order"] );
 
 		$Data = array();
