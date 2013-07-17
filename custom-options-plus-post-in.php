@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Custom Options Plus Post In
-Description: Add the value of the option. and Available for use in the post article.
-Plugin URI: http://gqevu6bsiz.chicappa.jp
-Version: 1.2.1
+Description: Simply to manage Site Option Variables. You can also used as Shortcode.
+Plugin URI: http://wordpress.org/plugins/custom-options-plus-post-in/
+Version: 1.2.2
 Author: gqevu6bsiz
-Author URI: http://gqevu6bsiz.chicappa.jp/
+Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_2_2
 Text Domain: coppi
 Domain Path: /languages
 */
@@ -39,9 +39,12 @@ class Custom_Options_Plus_Post_In
 		$DBVer,
 		$Name,
 		$Dir,
+		$AuthorUrl,
 		$ltd,
+		$ltd_p,
 		$Table,
 		$PageSlug,
+		$Nonce,
 		$UPFN,
 		$Duplicated,
 		$Order,
@@ -52,13 +55,16 @@ class Custom_Options_Plus_Post_In
 
 		global $wpdb;
 
-		$this->Ver = '1.2.1';
+		$this->Ver = '1.2.2';
 		$this->DBVer = '1.0';
 		$this->Name = 'Custom Options Plus Post In';
 		$this->Dir = WP_PLUGIN_URL . '/' . dirname( plugin_basename( __FILE__ ) ) . '/';
+		$this->AuthorUrl = 'http://gqevu6bsiz.chicappa.jp/';
 		$this->ltd = 'coppi';
+		$this->ltd_p = $this->ltd . '_plugin';
 		$this->Table = $wpdb->prefix . 'coppi';
 		$this->PageSlug = 'coppi';
+		$this->Nonce = $this->PageSlug;
 		$this->UPFN = 'Y';
 
 		$this->Duplicated = false;
@@ -72,6 +78,7 @@ class Custom_Options_Plus_Post_In
 	function PluginSetup() {
 		// load text domain
 		load_plugin_textdomain( $this->ltd , false , basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( $this->ltd_p , false , basename( dirname( __FILE__ ) ) . '/languages' );
 
 		// plugin links
 		add_filter( 'plugin_action_links' , array( $this , 'plugin_action_links' ) , 10 , 2 );
@@ -90,11 +97,9 @@ class Custom_Options_Plus_Post_In
 
 			$mofile = $this->TransFileCk();
 			if( $mofile == false ) {
-				$translation_link = '<a href="http://gqevu6bsiz.chicappa.jp/please-translation/">Please translation</a>'; 
+				$translation_link = '<a href="' . $this->AuthorUrl . 'please-translation/">Please translate</a>'; 
 				array_unshift( $links, $translation_link );
 			}
-			$donation_link = '<a href="http://gqevu6bsiz.chicappa.jp/please-donation/">' . __( 'Donation' , $this->ltd ) . '</a>';
-			array_unshift( $links, $donation_link );
 			array_unshift( $links, '<a href="' . admin_url( 'options-general.php?page=' . $this->PageSlug ) . '">' . __('Settings') . '</a>' );
 
 		}
@@ -105,7 +110,7 @@ class Custom_Options_Plus_Post_In
 
 	// PluginSetup
 	function admin_menu() {
-		add_options_page( $this->Name , __( 'Customs Option' , $this->ltd ) . '(coppi)' , 'administrator' , $this->PageSlug , array( $this , 'coppi_setting') );
+		add_options_page( $this->Name , __( 'Custom Option' , $this->ltd ) . '(coppi)' , 'administrator' , $this->PageSlug , array( $this , 'coppi_setting') );
 	}
 
 
@@ -250,7 +255,7 @@ class Custom_Options_Plus_Post_In
 		global $wpdb;
 
 		$Update = $this->update_validate();
-		if( !empty( $Update ) ) {
+		if( !empty( $Update ) && check_admin_referer( $this->Nonce ) ) {
 
 			if( !empty( $_POST["data"] ) ) {
 				
@@ -303,7 +308,7 @@ class Custom_Options_Plus_Post_In
 					}
 					$this->Msg .= '<div class="updated"><p><strong>' . __('Settings saved.') . '</strong></p></div>';
 				} else {
-					$this->Msg .= '<div class="error"><p><strong>' . __( 'Option name is duplicated.' , $this->ltd ) . '</strong></p></div>';
+					$this->Msg .= '<div class="error"><p><strong>' . __( '"Option name" is duplicated.' , $this->ltd ) . '</strong></p></div>';
 				}
 
 
@@ -316,11 +321,13 @@ class Custom_Options_Plus_Post_In
 	// DataUpdate
 	function delete() {
 
-		global $wpdb;
-
-		$id = $_GET["delete"];
-		$wpdb->query( "DELETE FROM " . $this->Table . " WHERE option_id = " . $id );
-		$this->Msg .= '<div class="updated"><p><strong>' . __('Settings saved.') . '</strong></p></div>';
+		if( check_admin_referer( $this->Nonce ) ) {
+			global $wpdb;
+	
+			$id = $_GET["delete"];
+			$wpdb->query( "DELETE FROM " . $this->Table . " WHERE option_id = " . $id );
+			$this->Msg .= '<div class="updated"><p><strong>' . __('Settings saved.') . '</strong></p></div>';
+		}
 
 	}
 

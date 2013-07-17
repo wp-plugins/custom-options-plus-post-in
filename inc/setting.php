@@ -2,29 +2,31 @@
 
 $this->order();
 $Data = $this->get_datas();
+$nonce_v = wp_create_nonce( $this->Nonce );
 
 // include js css
 $ReadedJs = array( 'jquery' , 'thickbox' );
 wp_enqueue_script( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basename( __FILE__ ) ) ) . '.js', $ReadedJs , $this->Ver );
 wp_enqueue_style( 'thickbox' );
 wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basename( __FILE__ ) ) ) . '.css', array() , $this->Ver );
+
 ?>
 <div class="wrap">
 	<div class="icon32" id="icon-tools"></div>
 	<?php echo $this->Msg; ?>
 	<h2><?php echo $this->Name; ?></h2>
-	<p><?php _e ( 'Add the value of the option. and Available for use in the post article.' , $this->ltd ); ?>
+	<p><?php _e ( 'Please create an option value.' , $this->ltd ); ?>
 
 	<div class="metabox-holder columns-2">
 
 		<div id="postbox-container-1" class="postbox-container">
 			<div class="postbox">
-				<h3 class="hndle"><span><?php _e( 'Create an option' , $this->ltd ); ?></span></h3>
+				<h3 class="hndle"><span><?php _e( 'Create an Option' , $this->ltd ); ?></span></h3>
 				<div class="inside">
 
 					<form id="coppi_create" class="coppi_form" method="post" action="">
 						<input type="hidden" name="<?php echo $this->UPFN; ?>" value="Y" />
-						<?php wp_nonce_field( 'coppi' ); ?>
+						<?php wp_nonce_field( $this->PageSlug ); ?>
 
 						<?php $field = 'create'; ?>
 						<p>
@@ -53,28 +55,68 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 		</div>
 
 		<div id="postbox-container-2" class="postbox-container">
-			<div class="postbox">
-				<h3 class="hndle"><span><?php _e( 'Plugin About' , $this->ltd ); ?></span></h3>
+
+			<div class="stuffbox" style="border-color: #FFC426; border-width: 3px;">
+				<h3 style="background: #FFF2D0; border-color: #FFC426;"><span class="hndle"><?php _e( 'Have you want to customize?' , $this->ltd_p ); ?></span></h3>
 				<div class="inside">
-					<?php $moFile = $this->TransFileCk(); ?>
-					<?php if( !$moFile ) : ?>
-						<p><strong>Please translate to your language.</strong><br />Looking for someone who will translate.</p>
-						<p><a href="http://gqevu6bsiz.chicappa.jp/please-translation/" target="_blank">To translate</a></p>
-					<?php endif; ?>
-					<p><strong><?php _e( 'Please donation.' , $this->ltd ); ?></strong></p>
-					<p><?php _e( 'When you are satisfied with my plugin,<br />I\'m want a gift card.<br />Thanks!' , $this->ltd ); ?></p>
-					<p><img src="http://gqevu6bsiz.chicappa.jp/wp-content/uploads/2013/01/email.gif"  /></p>
-					<p><a href="<?php _e( 'http://www.amazon.com/gp/gc' , $this->ltd ); ?>" target="_blank">Amazon Gift Card</a></p>
-					<p><strong><?php _e( 'Other' , $this->ltd ); ?></strong></p>
+					<p style="float: right;">
+						<img src="http://www.gravatar.com/avatar/7e05137c5a859aa987a809190b979ed4?s=46" width="46" /><br />
+						<a href="<?php echo $this->AuthorUrl; ?>contact-us/?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank">gqevu6bsiz</a>
+					</p>
+					<p><?php _e( 'I am good at Admin Screen Customize.' , $this->ltd_p ); ?></p>
+					<p><?php _e( 'Please consider the request to me if it is good.' , $this->ltd_p ); ?></p>
 					<p>
-						<span><a href="http://gqevu6bsiz.chicappa.jp/" target="_blank">blog</a></span> &nbsp; 
-						<span><a href="https://twitter.com/gqevu6bsiz" target="_blank">twitter</a></span> &nbsp; 
-						<span><a href="http://www.facebook.com/pages/Gqevu6bsiz/499584376749601" target="_blank">facebook</a></span> &nbsp; 
-						<span><a href="http://wordpress.org/support/plugin/custom-options-plus-post-in" target="_blank">support forum</a></span> &nbsp; 
-						<span><a href="http://wordpress.org/support/view/plugin-reviews/custom-options-plus-post-in" target="_blank">review</a></span>
+						<a href="http://wpadminuicustomize.com/blog/category/example/?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank"><?php _e ( 'Example Customize' , $this->ltd_p ); ?></a> :
+						<a href="<?php echo $this->AuthorUrl; ?>contact-us/?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank"><?php _e( 'Contact me' , $this->ltd_p ); ?></a></p>
+				</div>
+			</div>
+
+			<div class="stuffbox" id="donationbox" style="background: #87BCE4; border: 1px solid #227499;">
+				<div class="inside">
+					<p style="color: #FFFFFF; font-size: 20px;"><?php _e( 'Please donate.' , $this->ltd_p ); ?></p>
+					<p style="color: #FFFFFF;"><?php _e( 'You are contented with this plugin?<br />By the laws of Japan, Japan\'s new paypal user can not make a donate button.<br />So i would like you to buy this plugin as the replacement for the donate.' , $this->ltd_p ); ?></p>
+					<p>&nbsp;</p>
+					<p style="text-align: center;">
+						<a href="<?php echo $this->AuthorUrl; ?>please-donation/?utm_source=use_plugin&utm_medium=donate&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" class="button-primary" target="_blank"><?php _e( 'Please donate.' , $this->ltd_p ); ?></a>
 					</p>
 				</div>
 			</div>
+
+			<div class="stuffbox" id="aboutbox">
+				<h3><span class="hndle"><?php _e( 'About plugin' , $this->ltd_p ); ?></span></h3>
+				<div class="inside">
+					<p><?php _e( 'Version check' , $this->ltd_p ); ?> : 3.4.2 - 3.6 RC1</p>
+
+					<?php $moFile = $this->TransFileCk(); ?>
+					<?php if( !$moFile ) : ?>
+						<p>Would you like to translate your country language?</p>
+						<p><a href="http://gqevu6bsiz.chicappa.jp/please-translation/" target="_blank">Translate</a></p>
+					<?php endif; ?>
+
+					<ul>
+						<li><a href="http://wordpress.org/extend/plugins/custom-options-plus-post-in/" target="_blank"><?php _e( 'Plugin\'s site' , $this->ltd_p ); ?></a></li>
+						<li><a href="<?php echo $this->AuthorUrl; ?>?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank"><?php _e( 'Developer\'s site' , $this->ltd_p ); ?></a></li>
+						<li><a href="http://wordpress.org/support/plugin/custom-options-plus-post-in" target="_blank"><?php _e( 'Support Forums' ); ?></a></li>
+						<li><a href="http://wordpress.org/support/view/plugin-reviews/custom-options-plus-post-in" target="_blank"><?php _e( 'Reviews' , $this->ltd_p ); ?></a></li>
+						<li><a href="https://twitter.com/gqevu6bsiz" target="_blank">twitter</a></li>
+						<li><a href="http://www.facebook.com/pages/Gqevu6bsiz/499584376749601" target="_blank">facebook</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="stuffbox" id="usefulbox">
+				<h3><span class="hndle"><?php _e( 'Useful plugins' , $this->ltd_p ); ?></span></h3>
+				<div class="inside">
+					<p><strong><a href="http://wpadminuicustomize.com/?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank">WP Admin UI Customize</a></strong></p>
+					<p class="description"><?php _e( 'Customize a variety of screen management.' , $this->ltd_p ); ?></p>
+					<p><strong><a href="http://wordpress.org/extend/plugins/post-lists-view-custom/" target="_blank">Post Lists View Custom</a></strong></p>
+					<p class="description"><?php _e( 'Customize the list of the post and page. custom post type page, too. You can customize the column display items freely.' , $this->ltd_p ); ?></p>
+					<p><strong><a href="http://wordpress.org/plugins/media-insert-from-themes-dir/" target="_blank">Media Insert from Themes Dir</a></strong></p>
+					<p class="description"><?php _e( 'This Plugin is insert images in theme folder. Manipulated as easily as you would choose from Media Library.' , $this->ltd_p ); ?></p>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="clear"></div>
@@ -82,7 +124,7 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 	</div>
 
 
-	<h3><?php _e( 'List of options that you created' , $this->ltd ); ?></h3>
+	<h3><?php _e( 'Option value of created.' , $this->ltd ); ?></h3>
 
 	<div class="metabox-holder columns-1 update_table">
 
@@ -124,7 +166,7 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 						<form class="coppi_form" method="post" action="">
 							<input type="hidden" name="<?php echo $this->UPFN; ?>" value="Y" />
 							<input type="hidden" name="data[<?php echo $field; ?>][option_id]" value="<?php echo strip_tags( $content->option_id ); ?>" />
-							<?php wp_nonce_field( 'coppi' ); ?>
+							<?php wp_nonce_field( $this->PageSlug ); ?>
 
 							<tr id="tr_<?php echo $content->option_id; ?>">
 								<td class="create_date">
@@ -158,7 +200,7 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 											<a class="edit button-primary" href="javascript:void(0)"><?php _e('Edit'); ?></a>
 										</div>
 										<div class="alignright">
-											<a class="delete button" title="<?php _e('Confirm Deletion'); ?>" href="<?php echo esc_url( add_query_arg( array( "delete" => $content->option_id ) ) ); ?>"><?php _e('Delete'); ?></a>
+											<a class="delete button" title="<?php _e('Confirm Deletion'); ?>" href="<?php echo esc_url( add_query_arg( array( "delete" => $content->option_id , '_wpnonce' => $nonce_v ) ) ); ?>"><?php _e('Delete'); ?></a>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -189,7 +231,8 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 
 		<?php else : ?>
 
-			<?php _e( 'Not created option.' , $this->ltd ); ?>
+			<p><strong><?php _e( 'Not created option.' , $this->ltd ); ?></strong></p>
+			<p class="description"><?php _e( 'Please create an option value.' , $this->ltd ); ?></p>
 
 		<?php endif; ?>
 

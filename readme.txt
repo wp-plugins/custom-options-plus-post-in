@@ -1,37 +1,46 @@
 === CUSTOM OPTIONS PLUS POST IN ===
 Contributors: gqevu6bsiz
-Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/
+Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1.2.2
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
-Tested up to: 3.5.1
-Stable tag: 1.2.1
+Tested up to: 3.6 RC1
+Stable tag: 1.2.2
 License: GPL2
 
-Add the value of the option. and Available for use in the post article.
+Simply to manage Site Option Variables. You can also used as Shortcode.
 
 == Description ==
 
-This plug-in is a plug-in that allows you to add the value of the option.
-Option value that you have created, can be used in addition to the template tag,
-Short code can be used in the body of the article.
+This plugin is manage for Site Option variables.
+Created to Option value, you can used in Template Tag.
+And, you can used to Shortcode in the Post.
 
 == Installation ==
 
-1. Upload the full directory into your wp-content/plugins directory
-2. Activate the plugin at the plugin administration page
-3. Open the plugin configuration page,
-   which is located under Options -> custom options plus post in (coppi).
+1. Upload the `custom-options-plus-post-in` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Go to `WP-Admin -> Settings -> Custom Option (coppi)` to configure the plugin.
+
+= Usage =
+
+1. For Template Tags: `<?php echo get_coppi('example'); ?>`.
+2. For Shortcode: `[coppi key="example"]`.
 
 == Frequently Asked Questions ==
 
 
 == Screenshots ==
 
-1. Interface in setting
-2. Input sample tag
-3. Display cases
+1. Settings Interface
+2. Usage Example
+3. Display Example
 
 == Changelog ==
+
+= 1.2.2 =
+* Added a confirmation of Nonce field.
+* Checked Compatibility.
+* Added plugin information.
 
 = 1.2.1 =
 Create a table of only plugin activated.
