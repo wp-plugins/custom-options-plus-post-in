@@ -1,10 +1,10 @@
 === CUSTOM OPTIONS PLUS POST IN ===
 Contributors: gqevu6bsiz
-Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1.2.2
+Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_2_3
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
-Tested up to: 3.6 RC1
-Stable tag: 1.2.2
+Tested up to: 3.6
+Stable tag: 1.2.3
 License: GPL2
 
 Simply to manage Site Option Variables. You can also used as Shortcode.
@@ -36,6 +36,10 @@ And, you can used to Shortcode in the Post.
 3. Display Example
 
 == Changelog ==
+
+= 1.2.3 =
+* Support SSL.
+* Check to 3.6.
 
 = 1.2.2 =
 * Added a confirmation of Nonce field.

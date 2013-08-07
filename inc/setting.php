@@ -6,9 +6,9 @@ $nonce_v = wp_create_nonce( $this->Nonce );
 
 // include js css
 $ReadedJs = array( 'jquery' , 'thickbox' );
-wp_enqueue_script( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basename( __FILE__ ) ) ) . '.js', $ReadedJs , $this->Ver );
+wp_enqueue_script( $this->PageSlug , $this->Url . $this->PluginSlug . '.js', $ReadedJs , $this->Ver );
 wp_enqueue_style( 'thickbox' );
-wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basename( __FILE__ ) ) ) . '.css', array() , $this->Ver );
+wp_enqueue_style( $this->PageSlug , $this->Url . $this->PluginSlug . '.css', array() , $this->Ver );
 
 ?>
 <div class="wrap">
@@ -60,7 +60,7 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 				<h3 style="background: #FFF2D0; border-color: #FFC426;"><span class="hndle"><?php _e( 'Have you want to customize?' , $this->ltd_p ); ?></span></h3>
 				<div class="inside">
 					<p style="float: right;">
-						<img src="http://www.gravatar.com/avatar/7e05137c5a859aa987a809190b979ed4?s=46" width="46" /><br />
+						<img src="<?php echo $this->Schema; ?>www.gravatar.com/avatar/7e05137c5a859aa987a809190b979ed4?s=46" width="46" /><br />
 						<a href="<?php echo $this->AuthorUrl; ?>contact-us/?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank">gqevu6bsiz</a>
 					</p>
 					<p><?php _e( 'I am good at Admin Screen Customize.' , $this->ltd_p ); ?></p>
@@ -74,8 +74,6 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 			<div class="stuffbox" id="donationbox" style="background: #87BCE4; border: 1px solid #227499;">
 				<div class="inside">
 					<p style="color: #FFFFFF; font-size: 20px;"><?php _e( 'Please donate.' , $this->ltd_p ); ?></p>
-					<p style="color: #FFFFFF;"><?php _e( 'You are contented with this plugin?<br />By the laws of Japan, Japan\'s new paypal user can not make a donate button.<br />So i would like you to buy this plugin as the replacement for the donate.' , $this->ltd_p ); ?></p>
-					<p>&nbsp;</p>
 					<p style="text-align: center;">
 						<a href="<?php echo $this->AuthorUrl; ?>please-donation/?utm_source=use_plugin&utm_medium=donate&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" class="button-primary" target="_blank"><?php _e( 'Please donate.' , $this->ltd_p ); ?></a>
 					</p>
@@ -85,19 +83,19 @@ wp_enqueue_style( $this->PageSlug , $this->Dir . dirname( dirname( plugin_basena
 			<div class="stuffbox" id="aboutbox">
 				<h3><span class="hndle"><?php _e( 'About plugin' , $this->ltd_p ); ?></span></h3>
 				<div class="inside">
-					<p><?php _e( 'Version check' , $this->ltd_p ); ?> : 3.4.2 - 3.6 RC1</p>
+					<p><?php _e( 'Version check' , $this->ltd_p ); ?> : 3.4.2 - 3.6</p>
 
 					<?php $moFile = $this->TransFileCk(); ?>
 					<?php if( !$moFile ) : ?>
 						<p>Would you like to translate your country language?</p>
-						<p><a href="http://gqevu6bsiz.chicappa.jp/please-translation/" target="_blank">Translate</a></p>
+						<p><a href="<?php echo $this->AuthorUrl; ?>please-translation/" target="_blank">Translate</a></p>
 					<?php endif; ?>
 
 					<ul>
-						<li><a href="http://wordpress.org/extend/plugins/custom-options-plus-post-in/" target="_blank"><?php _e( 'Plugin\'s site' , $this->ltd_p ); ?></a></li>
+						<li><a href="http://wordpress.org/extend/plugins/<?php echo $this->PluginSlug; ?>/" target="_blank"><?php _e( 'Plugin\'s site' , $this->ltd_p ); ?></a></li>
 						<li><a href="<?php echo $this->AuthorUrl; ?>?utm_source=use_plugin&utm_medium=side&utm_content=<?php echo $this->ltd; ?>&utm_campaign=<?php echo str_replace( '.' , '_' , $this->Ver ); ?>" target="_blank"><?php _e( 'Developer\'s site' , $this->ltd_p ); ?></a></li>
-						<li><a href="http://wordpress.org/support/plugin/custom-options-plus-post-in" target="_blank"><?php _e( 'Support Forums' ); ?></a></li>
-						<li><a href="http://wordpress.org/support/view/plugin-reviews/custom-options-plus-post-in" target="_blank"><?php _e( 'Reviews' , $this->ltd_p ); ?></a></li>
+						<li><a href="http://wordpress.org/support/plugin/<?php echo $this->PluginSlug; ?>" target="_blank"><?php _e( 'Support Forums' ); ?></a></li>
+						<li><a href="http://wordpress.org/support/view/plugin-reviews/<?php echo $this->PluginSlug; ?>" target="_blank"><?php _e( 'Reviews' , $this->ltd_p ); ?></a></li>
 						<li><a href="https://twitter.com/gqevu6bsiz" target="_blank">twitter</a></li>
 						<li><a href="http://www.facebook.com/pages/Gqevu6bsiz/499584376749601" target="_blank">facebook</a></li>
 					</ul>

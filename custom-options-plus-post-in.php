@@ -3,9 +3,9 @@
 Plugin Name: Custom Options Plus Post In
 Description: Simply to manage Site Option Variables. You can also used as Shortcode.
 Plugin URI: http://wordpress.org/plugins/custom-options-plus-post-in/
-Version: 1.2.2
+Version: 1.2.3
 Author: gqevu6bsiz
-Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_2_2
+Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_2_3
 Text Domain: coppi
 Domain Path: /languages
 */
@@ -39,12 +39,15 @@ class Custom_Options_Plus_Post_In
 		$DBVer,
 		$Name,
 		$Dir,
+		$Url,
 		$AuthorUrl,
 		$ltd,
 		$ltd_p,
 		$Table,
 		$PageSlug,
+		$PluginSlug,
 		$Nonce,
+		$Schema,
 		$UPFN,
 		$Duplicated,
 		$Order,
@@ -55,16 +58,19 @@ class Custom_Options_Plus_Post_In
 
 		global $wpdb;
 
-		$this->Ver = '1.2.2';
+		$this->Ver = '1.2.3';
 		$this->DBVer = '1.0';
 		$this->Name = 'Custom Options Plus Post In';
-		$this->Dir = WP_PLUGIN_URL . '/' . dirname( plugin_basename( __FILE__ ) ) . '/';
+		$this->Dir = plugin_dir_path( __FILE__ );
+		$this->Url = plugin_dir_url( __FILE__ );
 		$this->AuthorUrl = 'http://gqevu6bsiz.chicappa.jp/';
 		$this->ltd = 'coppi';
 		$this->ltd_p = $this->ltd . '_plugin';
 		$this->Table = $wpdb->prefix . 'coppi';
 		$this->PageSlug = 'coppi';
+		$this->PluginSlug = dirname( plugin_basename( __FILE__ ) );
 		$this->Nonce = $this->PageSlug;
+		$this->Schema = is_ssl() ? 'https://' : 'http://';
 		$this->UPFN = 'Y';
 
 		$this->Duplicated = false;
@@ -77,8 +83,8 @@ class Custom_Options_Plus_Post_In
 	// PluginSetup
 	function PluginSetup() {
 		// load text domain
-		load_plugin_textdomain( $this->ltd , false , basename( dirname( __FILE__ ) ) . '/languages' );
-		load_plugin_textdomain( $this->ltd_p , false , basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( $this->ltd , false , $this->PluginSlug . '/languages' );
+		load_plugin_textdomain( $this->ltd_p , false , $this->PluginSlug . '/languages' );
 
 		// plugin links
 		add_filter( 'plugin_action_links' , array( $this , 'plugin_action_links' ) , 10 , 2 );
@@ -117,7 +123,7 @@ class Custom_Options_Plus_Post_In
 	// Translation File Check
 	function TransFileCk() {
 		$file = false;
-		$moFile = WP_PLUGIN_DIR . '/' . dirname( plugin_basename( __FILE__ ) ) . '/languages/' . $this->ltd . '-' . get_locale() . '.mo';
+		$moFile = $this->Dir . 'languages/' . $this->ltd . '-' . get_locale() . '.mo';
 		if( file_exists( $moFile ) ) {
 			$file = true;
 		}
@@ -346,7 +352,7 @@ function coppi_shortcode( $atts ) {
 	$ret = '';
 	
 	if( !empty( $atts["key"] ) ) {
-		$coppi = new Custom_Options_Plus_Post_In();
+		global $coppi;
 		$ret = $coppi->get_data( $atts["key"] );
 	}
 	
@@ -361,7 +367,7 @@ function get_coppi( $key = '' ) {
 	$ret = '';
 	
 	if( !empty( $key ) ) {
-		$coppi = new Custom_Options_Plus_Post_In();
+		global $coppi;
 		$ret = $coppi->get_data( $key );
 	}
 	
