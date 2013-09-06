@@ -1,56 +1,123 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.0\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-07-17 13:10+0900\n"
+"Project-Id-Version: CUSTOM OPTIONS PLUS POST IN\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-06 15:18+0900\n"
+"PO-Revision-Date: 2013-09-06 15:22+0900\n"
+"Last-Translator: gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
 "Language-Team: gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Language: Japanese\n"
 "X-Poedit-Country: JAPAN\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"Last-Translator: Gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
+"X-Poedit-SearchPath-0: .\n"
 
-msgid "Simply to manage Site Option Variables. You can also used as Shortcode."
-msgstr "簡単にサイトのオプション値を設定。ショートコードとしても利用できます。"
-
-msgid "Please create an option value."
-msgstr "オプションの値を作成してください。"
-
+#: custom-options-plus-post-in.php:135
 msgid "Custom Option"
 msgstr "オプション カスタム"
 
-msgid "Create an Option"
-msgstr "オプションを作成"
+#: custom-options-plus-post-in.php:365
+msgid "Category change"
+msgstr "カテゴリー変更"
 
-msgid "Option Name"
-msgstr "オプション名"
-
-msgid "Option Value"
-msgstr "オプションの値"
-
-msgid "Please enter a value that does not duplicated."
-msgstr "重複しない値を入力してください。"
-
-msgid "Usable Javascript and Html tag."
-msgstr "Javascript と HTMLタグ使用可能です。"
-
-msgid "\"Option name\" is duplicated."
-msgstr "オプション名が重複しています。"
-
-msgid "Option value of created."
-msgstr "作成したオプション一覧"
-
-msgid "Not created option."
-msgstr "作成されたオプションはありません"
-
+#: custom-options-plus-post-in.php:387
 msgid "Create Date"
 msgstr "作成日"
 
+#: custom-options-plus-post-in.php:388
+#: inc/setting.php:70
+msgid "Option Name"
+msgstr "オプション名"
+
+#: custom-options-plus-post-in.php:389
+#: inc/setting.php:95
+msgid "Option Value"
+msgstr "オプションの値"
+
+#: custom-options-plus-post-in.php:407
 msgid "Tag of the template"
 msgstr "テンプレートで使うタグ"
 
+#: custom-options-plus-post-in.php:408
 msgid "Shortcode"
 msgstr "記事本文で使うショートコード"
 
+#: custom-options-plus-post-in.php:540
+msgid "Settings saved to memo."
+msgstr "メモを保存しました。"
+
+#: custom-options-plus-post-in.php:611
+msgid "\"Option name\" is duplicated."
+msgstr "オプション名が重複しています。"
+
+#: custom-options-plus-post-in.php:675
+msgid "\"Category name\" is duplicated."
+msgstr "カテゴリ名が重複しています。"
+
+#: inc/setting.php:16
+msgid "Are you sure you want to bulk action?"
+msgstr "本当に一括変更してもよろしいですか？"
+
+#: inc/setting.php:23
+#: inc/setting.php:346
+msgid "Please create custom options."
+msgstr "カスタムオプションを作成してください。"
+
+#: inc/setting.php:32
+#: inc/setting.php:38
+msgid "Edit to Memo"
+msgstr "メモを編集"
+
+#: inc/setting.php:34
+msgid "Use of Memo"
+msgstr "メモを使う"
+
+#: inc/setting.php:41
+msgid "Please use it as reminder for your manage."
+msgstr "管理しやすくなるようにメモをご利用ください。"
+
+#: inc/setting.php:58
+msgid "Add New Custom Option"
+msgstr "オプションを作成"
+
+#: inc/setting.php:75
+#: inc/setting.php:131
+#: inc/setting.php:174
+msgid "Please enter a value that does not duplicated."
+msgstr "重複しない値を入力してください。"
+
+#: inc/setting.php:100
+msgid "Usable Javascript and Html tag."
+msgstr "Javascript と HTMLタグ使用可能です。"
+
+#: inc/setting.php:156
+msgid "Select the category for edit."
+msgstr "編集したいカテゴリを選択"
+
+#: inc/setting.php:168
+msgid "Changed name"
+msgstr "変更後の名前"
+
+#: inc/setting.php:186
+msgid "Not created category."
+msgstr "作成されたカテゴリーはありません"
+
+#: inc/setting.php:294
+msgid "Custom options of created."
+msgstr "作成したカスタムオプション一覧"
+
+#: inc/setting.php:345
+msgid "Not created option."
+msgstr "作成されたカスタムオプションはありません"
+
+#~ msgid ""
+#~ "This plugin is create to custom options in your WordPress. You can use in "
+#~ "the Template and Shortcode."
+#~ msgstr ""
+#~ "カスタムオプションを作成するプラグインです。テンプレートとショートコードで"
+#~ "利用できます。"

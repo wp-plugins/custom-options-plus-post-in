@@ -1,19 +1,26 @@
 === CUSTOM OPTIONS PLUS POST IN ===
 Contributors: gqevu6bsiz
-Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_2_3
+Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_3
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
 Tested up to: 3.6
-Stable tag: 1.2.3
+Stable tag: 1.3
 License: GPL2
 
-Simply to manage Site Option Variables. You can also used as Shortcode.
+This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
 
 == Description ==
 
-This plugin is manage for Site Option variables.
-Created to Option value, you can used in Template Tag.
-And, you can used to Shortcode in the Post.
+This plugin is manage of custom options for site.
+
+You can create the options easily.
+And, you can use for Template.
+`<?php echo get_coppi( 'example' ); ?>`.
+
+And then, you can use to Shortcode for Post.
+`[coppi key="example"]`
+
+If you create a lot of options, You can manage the category for custom options.
 
 == Installation ==
 
@@ -32,10 +39,19 @@ And, you can used to Shortcode in the Post.
 == Screenshots ==
 
 1. Settings Interface
-2. Usage Example
-3. Display Example
+2. Created Lists Interface
+3. Memo
+4. Usage Example for Post
+5. Usage Example for Template
+6. Display Example
 
 == Changelog ==
+
+= 1.3 =
+* Updated the translation.
+* Enhancement: Manage in category.
+* Enhancement: Bulk delete.
+* Enhancement: Added to Memo for manage.
 
 = 1.2.3 =
 * Support SSL.

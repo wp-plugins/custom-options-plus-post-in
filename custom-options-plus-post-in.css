@@ -9,7 +9,39 @@
 	cursor: default; 	
 }
 
+.columns-2.full-width #postbox-container-1 {
+	width: 90%;
+}
+.columns-2.full-width #postbox-container-2 {
+	width: 8%;
+	margin-left: 2%;
+}
+.columns-2.full-width #postbox-container-2 .stuffbox, .columns-2.full-width #postbox-container-2 .description {
+	display: none;
+}
 
+.columns-2 #postbox-container-2 .toggle-plugin .icon {
+	background: transparent url(../../../wp-admin/images/arrows.png) no-repeat 0 -107px;
+	padding-left: 16px;
+}
+.columns-2.full-width #postbox-container-2 .toggle-plugin .icon {
+	background-position: 0 -72px;
+}
+
+
+
+#postbox-container-1 .memo_show {
+	padding: 10px;
+	background-color: #fffbcc;
+	border: 1px solid #e6db55;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+.columns-2 #postbox-container-1 .postbox.memo {
+	display: none;
+}
 
 
 
@@ -20,17 +52,24 @@ form#coppi_create textarea {
 
 
 
+form#coppi_update_cat .category_edit {
+	display: none;
+}
+
 
 .update_table table thead th.create_date {
+	width: 10%;
+}
+.update_table table thead th.category {
 	width: 10%;
 }
 .update_table table thead th.option_name {
 	width: 20%;
 }
-.update_table table thead th.shortcode {
+.update_table table thead th.template_tag {
 	width: 20%;
 }
-.update_table table thead th.template_tag {
+.update_table table thead th.shortcode {
 	width: 20%;
 }
 .update_table table thead th.operation {
