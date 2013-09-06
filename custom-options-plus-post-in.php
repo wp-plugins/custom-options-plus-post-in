@@ -3,9 +3,9 @@
 Plugin Name: Custom Options Plus Post In
 Description: This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
 Plugin URI: http://wordpress.org/plugins/custom-options-plus-post-in/
-Version: 1.3
+Version: 1.3.1
 Author: gqevu6bsiz
-Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_3
+Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_3_1
 Text Domain: coppi
 Domain Path: /languages
 */
@@ -60,8 +60,8 @@ class Custom_Options_Plus_Post_In
 
 		global $wpdb;
 
-		$this->Ver = '1.3';
-		$this->DBVer = '1.1';
+		$this->Ver = '1.3.1';
+		$this->DBVer = '1.2';
 		$this->Name = 'Custom Options Plus Post In';
 		$this->Dir = plugin_dir_path( __FILE__ );
 		$this->Url = plugin_dir_url( __FILE__ );
@@ -103,7 +103,7 @@ class Custom_Options_Plus_Post_In
 		add_action( 'admin_menu' , array( $this , 'admin_menu' ) , 2 );
 		
 		// setup database
-		register_activation_hook( __FILE__ , array( $this , 'Setup_DB' ) );
+		add_action( 'admin_init' , array( $this , 'Setup_DB' ) );
 
 		// get donation toggle
 		add_action( 'wp_ajax_' . $this->ltd . '_get_donation_toggle' , array( $this , 'wp_ajax_' . $this->ltd . '_get_donation_toggle' ) );
@@ -192,11 +192,14 @@ class Custom_Options_Plus_Post_In
 	
 			}
 
-		} elseif ( version_compare( $CurrentDBVer , $this->Ver , '<' ) ) {
-			
-			$wpdb->query(
-				"ALTER TABLE " . $this->Table["option"] . " ADD `cat_id` bigint(20) unsigned NOT NULL default '0' AFTER `option_value`"
-			);
+		} elseif ( version_compare( $CurrentDBVer , $this->DBVer , '<' ) ) {
+
+			$exist_cat_id = $wpdb->query( "DESCRIBE " . $this->Table["option"] . " `cat_id`" );
+			if( empty( $exist_cat_id ) ) {
+				$wpdb->query(
+					"ALTER TABLE " . $this->Table["option"] . " ADD `cat_id` bigint(20) unsigned NOT NULL default '0' AFTER `option_value`"
+				);
+			}
 
 		}
 
