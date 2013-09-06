@@ -4,7 +4,7 @@ Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.4.2
 Tested up to: 3.6
-Stable tag: 1.3
+Stable tag: 1.2.3
 License: GPL2
 
 This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
