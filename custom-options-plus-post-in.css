@@ -77,6 +77,10 @@ form#coppi_update_cat .category_edit {
 }
 
 
+.update_table table tbody tr.saved th,
+.update_table table tbody tr.saved td {
+	background-color: #fffbcc;
+}
 .update_table table tbody td .off {
 	display: none;
 }

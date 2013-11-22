@@ -3,9 +3,9 @@
 Plugin Name: Custom Options Plus Post In
 Description: This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
 Plugin URI: http://wordpress.org/plugins/custom-options-plus-post-in/
-Version: 1.3.1
+Version: 1.3.2
 Author: gqevu6bsiz
-Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_3_1
+Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_3_2
 Text Domain: coppi
 Domain Path: /languages
 */
@@ -42,7 +42,6 @@ class Custom_Options_Plus_Post_In
 		$Url,
 		$AuthorUrl,
 		$ltd,
-		$ltd_p,
 		$Record,
 		$Table,
 		$PageSlug,
@@ -60,14 +59,13 @@ class Custom_Options_Plus_Post_In
 
 		global $wpdb;
 
-		$this->Ver = '1.3.1';
+		$this->Ver = '1.3.2';
 		$this->DBVer = '1.2';
 		$this->Name = 'Custom Options Plus Post In';
 		$this->Dir = plugin_dir_path( __FILE__ );
 		$this->Url = plugin_dir_url( __FILE__ );
 		$this->AuthorUrl = 'http://gqevu6bsiz.chicappa.jp/';
 		$this->ltd = 'coppi';
-		$this->ltd_p = $this->ltd . '_plugin';
 		$this->Record = array(
 			"db_ver" => $this->ltd . '_db_ver',
 			"memo" => $this->ltd . '_memo',
@@ -94,7 +92,6 @@ class Custom_Options_Plus_Post_In
 	function PluginSetup() {
 		// load text domain
 		load_plugin_textdomain( $this->ltd , false , $this->PluginSlug . '/languages' );
-		load_plugin_textdomain( $this->ltd_p , false , $this->PluginSlug . '/languages' );
 
 		// plugin links
 		add_filter( 'plugin_action_links' , array( $this , 'plugin_action_links' ) , 10 , 2 );
@@ -104,6 +101,12 @@ class Custom_Options_Plus_Post_In
 		
 		// setup database
 		add_action( 'admin_init' , array( $this , 'Setup_DB' ) );
+
+		// update row
+		add_action( 'wp_ajax_' . $this->ltd . '_update_line' , array( $this , 'wp_ajax_' . $this->ltd . '_update_line' ) );
+
+		// delete row
+		add_action( 'wp_ajax_' . $this->ltd . '_delete_line' , array( $this , 'wp_ajax_' . $this->ltd . '_delete_line' ) );
 
 		// get donation toggle
 		add_action( 'wp_ajax_' . $this->ltd . '_get_donation_toggle' , array( $this , 'wp_ajax_' . $this->ltd . '_get_donation_toggle' ) );
@@ -243,8 +246,6 @@ class Custom_Options_Plus_Post_In
 			$this->update();
 		} elseif( !empty( $_GET["delete_cat"] ) ) {
 			$this->delete_cat();
-		} elseif( !empty( $_GET["delete"] ) ) {
-			$this->delete();
 		} elseif( !empty( $_POST["bulk"] ) ) {
 			$this->update_bulk();
 		}
@@ -355,7 +356,7 @@ class Custom_Options_Plus_Post_In
 	}
 
 	// SettingList
-	function get_list_optoin( $cat_id , $option_count ) {
+	function get_list_option( $cat_id , $option_count ) {
 		$Data = $this->get_datas();
 		$Categories = $this->get_categories();
 
@@ -422,67 +423,9 @@ class Custom_Options_Plus_Post_In
 						<?php $field = 'update'; ?>
 						<?php foreach( $Data as $key => $content ) : ?>
 							<?php if( $content->cat_id == $cat_id ) : ?>
-	
-								<form class="coppi_form" method="post" action="">
-									<input type="hidden" name="<?php echo $this->UPFN; ?>" value="Y" />
-									<input type="hidden" name="data[<?php echo $field; ?>][option_id]" value="<?php echo strip_tags( $content->option_id ); ?>" />
-									<?php wp_nonce_field( $this->PageSlug ); ?>
-			
-									<tr id="tr_<?php echo $content->option_id; ?>">
-										<th class="check-column">
-											<input type="checkbox" name="data[<?php echo $field; ?>][]" value="<?php echo strip_tags( $content->option_id ); ?>">
-										</th>
-										<td class="create_date">
-											<?php echo mysql2date( get_option('date_format') , strip_tags( $content->create_date ) ); ?><br />
-											<span style="font-size: 10px;">(<?php echo strip_tags( $content->create_date ); ?>)</span>
-										</td>
-										<td class="option_name">
-											<div class="off">
-												<p><input type="text" name="data[<?php echo $field; ?>][option_name]" value="<?php echo strip_tags( $content->option_name ); ?>" /></p>
-												<p><?php _e( 'Category' ); ?>: <select name="data[<?php echo $field; ?>][cat_id]">
-													<option value="0" <?php selected( 0 , $content->cat_id ); ?>><?php _e( 'Uncategorized' ); ?></option>
-													<?php if( !empty( $Categories ) ) : ?>
-														<?php foreach( $Categories as $k => $cat) : ?>
-															<option value="<?php echo strip_tags( $cat->cat_id ); ?>" <?php selected( $cat->cat_id , $content->cat_id ); ?>><?php echo strip_tags( $cat->cat_name ); ?></option>
-														<?php endforeach; ?>
-													<?php endif; ?>
-												</select></p>
-											</div>
-											<div class="on">
-												<?php echo strip_tags( $content->option_name ); ?>
-											</div>
-										</td>
-										<td class="option_value">
-											<div class="off">
-												<textarea name="data[<?php echo $field; ?>][option_value]" rows="10" cols="25"><?php echo stripslashes( $content->option_value ); ?></textarea>
-											</div>
-											<div class="on">
-												<?php echo stripslashes( esc_html( $content->option_value ) ); ?>
-											</div>
-										</td>
-										<td class="template_tag">
-											<code>&lt;?php echo get_coppi('<?php echo esc_html( $content->option_name ); ?>'); ?&gt;</code>
-										</td>
-										<td class="shortcode">
-											<code>[coppi key="<?php echo esc_html( $content->option_name); ?>"]</code>
-										</td>
-										<td class="operation">
-											<div class="on">
-												<div class="alignleft">
-													<a class="edit button-primary" href="javascript:void(0)"><?php _e('Edit'); ?></a>
-												</div>
-												<div class="alignright">
-													<a class="delete button" title="<?php _e( 'Confirm Deletion' ); ?>" href="<?php echo esc_url( add_query_arg( array( "delete" => $content->option_id , '_wpnonce' => wp_create_nonce( $this->Nonce ) ) ) ); ?>"><?php _e('Delete'); ?></a>
-												</div>
-												<div class="clear"></div>
-											</div>
-											<div class="off">
-												<input type="submit" class="button-primary" name="update" value="<?php _e( 'Save' ); ?>" />
-											</div>
-										</td>
-									</tr>
-								</form>
-	
+
+								<?php $this->get_list_single_row( $content , "" ); ?>
+
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</tbody>
@@ -492,6 +435,167 @@ class Custom_Options_Plus_Post_In
 
 		}
 
+	}
+
+	// SettingList
+	function get_list_single_row( $content , $saved = false ) {
+		$Categories = $this->get_categories();
+		$field = 'update';
+		
+		if( is_object( $content ) ) {
+			$content = (array) $content;
+		}
+		
+		$TrClass = "";
+		if( !empty( $saved ) && $saved == 'saved' ) {
+			$TrClass .= ' saved';
+		}
+?>
+		<tr id="tr_<?php echo $content["option_id"]; ?>" class="<?php echo $TrClass; ?>">
+			<th class="check-column">
+				<input type="checkbox" name="data[<?php echo $field; ?>][]" value="<?php echo strip_tags( $content["option_id"] ); ?>">
+			</th>
+			<td class="create_date">
+				<?php echo mysql2date( get_option('date_format') , strip_tags( $content["create_date"] ) ); ?><br />
+				<span style="font-size: 10px;">(<?php echo strip_tags( $content["create_date"] ); ?>)</span>
+			</td>
+			<td class="option_name">
+				<div class="off">
+					<p><input type="text" name="data[<?php echo $field; ?>][option_name]" value="<?php echo strip_tags( $content["option_name"] ); ?>" /></p>
+					<p><?php _e( 'Category' ); ?>: <select name="data[<?php echo $field; ?>][cat_id]">
+						<option value="0" <?php selected( 0 , $content["cat_id"] ); ?>><?php _e( 'Uncategorized' ); ?></option>
+						<?php if( !empty( $Categories ) ) : ?>
+							<?php foreach( $Categories as $k => $cat) : ?>
+								<option value="<?php echo strip_tags( $cat->cat_id ); ?>" <?php selected( $cat->cat_id , $content["cat_id"] ); ?>><?php echo strip_tags( $cat->cat_name ); ?></option>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</select></p>
+				</div>
+				<div class="on">
+					<?php echo strip_tags( $content["option_name"] ); ?>
+				</div>
+			</td>
+			<td class="option_value">
+				<div class="off">
+					<textarea name="data[<?php echo $field; ?>][option_value]" rows="10" cols="25"><?php echo stripslashes( $content["option_value"] ); ?></textarea>
+				</div>
+				<div class="on">
+					<?php echo stripslashes( esc_html( $content["option_value"] ) ); ?>
+				</div>
+			</td>
+			<td class="template_tag">
+				<code>&lt;?php echo get_coppi('<?php echo esc_html( $content["option_name"] ); ?>'); ?&gt;</code>
+			</td>
+			<td class="shortcode">
+				<code>[coppi key="<?php echo esc_html( $content["option_name"] ); ?>"]</code>
+			</td>
+			<td class="operation">
+				<span class="spinner"></span>
+				<div class="on">
+					<div class="alignleft">
+						<a class="edit button-primary" href="javascript:void(0)"><?php _e('Edit'); ?></a>
+					</div>
+					<div class="alignright">
+						<a class="delete button" title="<?php _e( 'Confirm Deletion' ); ?>" href=""><?php _e('Delete'); ?></a>
+					</div>
+					<div class="clear"></div>
+					<?php if( !empty( $saved ) ) : ?>
+						<strong><?php _e( 'Settings saved.' ); ?></strong>
+					<?php endif; ?>
+				</div>
+				<div class="off">
+					<form class="coppi_form" method="post" action="<?php echo remove_query_arg( array( '_wpnonce' , 'delete_cat' ) ); ?>" name="save_line">
+						<input type="hidden" name="<?php echo $this->UPFN; ?>" value="Y" />
+						<input type="hidden" name="data[<?php echo $field; ?>][option_id]" value="<?php echo strip_tags( $content["option_id"] ); ?>" />
+						<?php wp_nonce_field( $this->PageSlug ); ?>
+						<input type="submit" class="button-primary" name="update" value="<?php _e( 'Save' ); ?>" />
+					</form>
+				</div>
+			</td>
+		</tr>
+<?php
+	}
+
+	// SetList
+	function wp_ajax_coppi_update_line() {
+		global $wpdb;
+
+		if( !empty( $_POST["action"] ) && $_POST["action"] == 'coppi_update_line' && check_ajax_referer( $this->Nonce , "nonce" ) ) {
+			$UPFN = strip_tags( $_POST["UPFN"] );
+			if( $UPFN == $this->UPFN ) {
+				$Update["UPFN"] = strip_tags( $_POST["UPFN"] );
+			}
+			
+			if( !empty( $_POST["data"] ) && !empty( $_POST["data"]["option_name"] ) ) {
+
+				// duplicate check
+				$checkkey = "";
+				$checkid = "";
+				if( !empty( $_POST["data"]["option_name"] ) && !empty( $_POST["data"]["option_id"] ) ) {
+					$checkkey = strip_tags( $_POST["data"]["option_name"] );
+					$checkid = strip_tags( $_POST["data"]["option_id"] );
+				}
+				
+				$this->duplicated_check( "update" , $checkid , $checkkey );
+				$type = false;
+
+				// update
+				if( !empty( $_POST["data"] ) ) {
+
+					$tmpK = strip_tags( $_POST["data"]["option_name"] );
+					$tmpV = $_POST["data"]["option_value"];
+					$cat = intval( $_POST["data"]["cat_id"] );
+					$tmpID = strip_tags( $_POST["data"]["option_id"] );
+					$Update = array( "option_name" => $tmpK , "option_value" => $tmpV , "cat_id" => $cat , "option_id" => $tmpID );
+					$type = 'update';
+
+				}
+				
+				if( $this->Duplicated == false ) {
+					
+					if( !empty( $type ) && $type == 'update' ) {
+
+						$wpdb->query(
+							"UPDATE " . $this->Table["option"] . " SET " .
+							"option_name = '" . $Update["option_name"] . "'," .
+							"option_value = '" . $Update["option_value"] . "'," .
+							"cat_id = '" . $Update["cat_id"] . "' WHERE option_id = " . $Update["option_id"]
+						);
+
+						$GetData = $wpdb->get_results( "SELECT * FROM " . $this->Table["option"] . " WHERE `option_id` = '" . $Update["option_id"] . "'" );
+						
+						if( !empty( $GetData[0] ) ) {
+							$this->get_list_single_row( $GetData[0] , 'saved' );
+						}
+
+					}
+					
+				} else {
+					$Err = array( "msg" => '<p>' . strip_tags( $this->Msg ) . '</p>' );
+					wp_send_json_error( $Err );
+				}
+			}
+
+		}
+		die();
+	}
+
+	// SetList
+	function wp_ajax_coppi_delete_line() {
+		global $wpdb;
+
+		if( !empty( $_POST["action"] ) && $_POST["action"] == 'coppi_delete_line' && check_ajax_referer( $this->Nonce , "nonce" ) ) {
+
+			if( !empty( $_POST["data"] ) && !empty( $_POST["data"]["option_id"] ) ) {
+
+				$id = intval( $_POST["data"]["option_id"] );
+				$wpdb->query( "DELETE FROM " . $this->Table["option"] . " WHERE option_id = " . $id );
+				$Msg = array( "msg" => '<p>' . __( 'Settings saved.' ) . '</p>' );
+				wp_send_json_success( $Msg );
+			}
+
+		}
+		die();
 	}
 
 	// SetList
@@ -505,6 +609,29 @@ class Custom_Options_Plus_Post_In
 		update_option( $this->Record["donate_width"] , intval( $_POST["f"] ) );
 		die();
 	}
+
+
+
+	// DataCheck
+	function duplicated_check( $type , $option_id = false , $option_name = false ) {
+		global $wpdb;
+		
+		$duplicated_id = $wpdb->get_var( "SELECT * FROM " . $this->Table["option"] . " WHERE `option_name` LIKE '" . $option_name . "'" );
+		
+		if( !empty( $duplicated_id ) ) {
+			if( $type == 'create' )  {
+				$this->Duplicated = true;
+			} else if( $type == 'update' && $duplicated_id != $option_id ) {
+				$this->Duplicated = true;
+			}
+		}
+		
+		if( $this->Duplicated ) {
+			$this->Msg .= '<div class="error"><p><strong>' . __( '"Option name" is duplicated.' , $this->ltd ) . '</strong></p></div>';
+		}
+	}
+
+
 
 
 
@@ -531,7 +658,7 @@ class Custom_Options_Plus_Post_In
 				$SubmitKey = md5( strip_tags( $_POST["donate_key"] ) );
 				if( $this->DonateKey == $SubmitKey ) {
 					update_option( $this->Record["donate"] , $SubmitKey );
-					$this->Msg .= '<div class="updated"><p><strong>' . __( 'Thank you for your donation.' , $this->ltd_p ) . '</strong></p></div>';
+					$this->Msg .= '<div class="updated"><p><strong>' . __( 'Thank you for your donation.' , $this->ltd ) . '</strong></p></div>';
 				}
 			}
 
@@ -559,22 +686,15 @@ class Custom_Options_Plus_Post_In
 		$Update = $this->update_validate();
 		if( !empty( $Update ) && check_admin_referer( $this->Nonce ) ) {
 
-			if( !empty( $_POST["data"] ) ) {
+			if( !empty( $_POST["data"] ) && !empty( $_POST["data"]["create"]["option_name"] ) ) {
 				
 				// duplicate check
 				$checkkey = "";
-				$checkid = "";
 				if( !empty( $_POST["data"]["create"]["option_name"] ) ) {
 					$checkkey = strip_tags( $_POST["data"]["create"]["option_name"] );
-				} elseif( !empty( $_POST["data"]["update"]["option_name"] ) ) {
-					$checkkey = strip_tags( $_POST["data"]["update"]["option_name"] );
-					$checkid = $_POST["data"]["update"]["option_id"];
 				}
-				$dup_query = $wpdb->get_var( "SELECT * FROM " . $this->Table["option"] . " WHERE `option_name` LIKE '" . $checkkey . "'" );
-				if( !empty( $dup_query ) && $dup_query != $checkid ) {
-					$this->Duplicated = true;
-				}
-
+				
+				$this->duplicated_check( "create" , "" , $checkkey );
 				$type = false;
 
 				// create
@@ -589,35 +709,14 @@ class Custom_Options_Plus_Post_In
 
 				}
 
-				// update
-				if( !empty( $_POST["data"]["update"] ) ) {
-
-					$tmpK = strip_tags( $_POST["data"]["update"]["option_name"] );
-					$tmpV = $_POST["data"]["update"]["option_value"];
-					$cat = intval( $_POST["data"]["update"]["cat_id"] );
-					$tmpID = strip_tags( $_POST["data"]["update"]["option_id"] );
-					$Update = array( "option_name" => $tmpK , "option_value" => $tmpV , "cat_id" => $cat , "option_id" => $tmpID );
-					$type = 'update';
-
-				}
-
 				if( $this->Duplicated == false ) {
 					
-					if( $type == 'create' ) {
+					if( !empty( $type ) && $type == 'create' ) {
 						$wpdb->query(
 							"INSERT INTO `" . $this->Table["option"] . "` (`option_id`, `option_name`, `option_value`, `cat_id`, `create_date`) VALUES (NULL, '" . join( "','" , $Update ) . "');"
 						);
-					} elseif( $type == 'update' ) {
-						$wpdb->query(
-							"UPDATE " . $this->Table["option"] . " SET " .
-							"option_name = '" . $Update["option_name"] . "'," .
-							"option_value = '" . $Update["option_value"] . "'," .
-							"cat_id = '" . $Update["cat_id"] . "' WHERE option_id = " . $Update["option_id"]
-						);
+						$this->Msg .= '<div class="updated"><p><strong>' . __( 'Settings saved.' ) . '</strong></p></div>';
 					}
-					$this->Msg .= '<div class="updated"><p><strong>' . __( 'Settings saved.' ) . '</strong></p></div>';
-				} else {
-					$this->Msg .= '<div class="error"><p><strong>' . __( '"Option name" is duplicated.' , $this->ltd ) . '</strong></p></div>';
 				}
 
 			}
@@ -653,52 +752,45 @@ class Custom_Options_Plus_Post_In
 				// create
 				if( !empty( $_POST["data"]["create_cat"] ) ) {
 
-					$date = date( 'Y-m-d H:i:s' );
-					$Update = array( "cat_name" => $checkkey , "create_date" => $date );
-					$type = 'create';
+					if( !empty( $_POST["data"]["create_cat"]["cat_name"] ) ) {
+						$date = date( 'Y-m-d H:i:s' );
+						$Update = array( "cat_name" => $checkkey , "create_date" => $date );
+						$type = 'create';
+					}
 
 				}
 
 				// update
 				if( !empty( $_POST["data"]["update_cat"] ) ) {
 
-					$tmpK = strip_tags( $_POST["data"]["update_cat"]["cat_name"] );
-					$tmpV = strip_tags( $_POST["data"]["update_cat"]["cat_id"] );
-					$Update = array( "cat_name" => $tmpK , "cat_id" => $tmpV );
-					$type = 'update';
+					if( !empty( $_POST["data"]["update_cat"]["cat_name"] ) ) {
+						$tmpK = strip_tags( $_POST["data"]["update_cat"]["cat_name"] );
+						$tmpV = strip_tags( $_POST["data"]["update_cat"]["cat_id"] );
+						$Update = array( "cat_name" => $tmpK , "cat_id" => $tmpV );
+						$type = 'update';
+					}
 
 				}
 
 				if( $this->DuplicatedCat == false ) {
-					if( $type == 'create' ) {
-						$wpdb->query(
-							"INSERT INTO `" . $this->Table["cat"] . "` (`cat_id`, `cat_name`, `create_date`) VALUES (NULL, '" . join( "','" , $Update ) . "');"
-						);
-					} elseif( $type == 'update' ) {
-						$wpdb->query(
-							"UPDATE " . $this->Table["cat"] . " SET cat_name = '" . $Update["cat_name"] . "' WHERE cat_id = " . $Update["cat_id"]
-						);
+					if( !empty( $type ) ) {
+						if( $type == 'create' ) {
+							$wpdb->query(
+								"INSERT INTO `" . $this->Table["cat"] . "` (`cat_id`, `cat_name`, `create_date`) VALUES (NULL, '" . join( "','" , $Update ) . "');"
+							);
+						} elseif( $type == 'update' ) {
+							$wpdb->query(
+								"UPDATE " . $this->Table["cat"] . " SET cat_name = '" . $Update["cat_name"] . "' WHERE cat_id = " . $Update["cat_id"]
+							);
+						}
+						$this->Msg .= '<div class="updated"><p><strong>' . __( 'Settings saved.' ) . '</strong></p></div>';
 					}
-					$this->Msg .= '<div class="updated"><p><strong>' . __( 'Settings saved.' ) . '</strong></p></div>';
 				} else {
 					$this->Msg .= '<div class="error"><p><strong>' . __( '"Category name" is duplicated.' , $this->ltd ) . '</strong></p></div>';
 				}
 
 			}
 		}
-	}
-
-	// DataUpdate
-	function delete() {
-
-		if( check_admin_referer( $this->Nonce ) ) {
-			global $wpdb;
-	
-			$id = intval( $_GET["delete"] );
-			$wpdb->query( "DELETE FROM " . $this->Table["option"] . " WHERE option_id = " . $id );
-			$this->Msg .= '<div class="updated"><p><strong>' . __( 'Settings saved.' ) . '</strong></p></div>';
-		}
-
 	}
 
 	// DataUpdate

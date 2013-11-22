@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CUSTOM OPTIONS PLUS POST IN\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 15:18+0900\n"
-"PO-Revision-Date: 2013-09-06 15:22+0900\n"
+"POT-Creation-Date: 2013-11-22 14:18+0900\n"
+"PO-Revision-Date: 2013-11-22 14:27+0900\n"
 "Last-Translator: gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
 "Language-Team: gqevu6bsiz <gqevu6bsiz@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,107 +17,203 @@ msgstr ""
 "X-Poedit-Country: JAPAN\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: custom-options-plus-post-in.php:135
+#: custom-options-plus-post-in.php:4
+msgid "This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode."
+msgstr "カスタムオプションを作成するプラグインです。テンプレートとショートコードで利用できます。"
+
+#: custom-options-plus-post-in.php:138
 msgid "Custom Option"
 msgstr "オプション カスタム"
 
-#: custom-options-plus-post-in.php:365
+#: custom-options-plus-post-in.php:375
 msgid "Category change"
 msgstr "カテゴリー変更"
 
-#: custom-options-plus-post-in.php:387
+#: custom-options-plus-post-in.php:397
 msgid "Create Date"
 msgstr "作成日"
 
-#: custom-options-plus-post-in.php:388
-#: inc/setting.php:70
+#: custom-options-plus-post-in.php:398
+#: inc/setting.php:72
 msgid "Option Name"
 msgstr "オプション名"
 
-#: custom-options-plus-post-in.php:389
-#: inc/setting.php:95
+#: custom-options-plus-post-in.php:399
+#: inc/setting.php:97
 msgid "Option Value"
 msgstr "オプションの値"
 
-#: custom-options-plus-post-in.php:407
+#: custom-options-plus-post-in.php:417
 msgid "Tag of the template"
 msgstr "テンプレートで使うタグ"
 
-#: custom-options-plus-post-in.php:408
+#: custom-options-plus-post-in.php:418
 msgid "Shortcode"
 msgstr "記事本文で使うショートコード"
 
-#: custom-options-plus-post-in.php:540
-msgid "Settings saved to memo."
-msgstr "メモを保存しました。"
-
-#: custom-options-plus-post-in.php:611
+#: custom-options-plus-post-in.php:630
 msgid "\"Option name\" is duplicated."
 msgstr "オプション名が重複しています。"
 
-#: custom-options-plus-post-in.php:675
+#: custom-options-plus-post-in.php:661
+#: inc/setting.php:220
+msgid "Thank you for your donation."
+msgstr "寄付いただきありがとうございます。"
+
+#: custom-options-plus-post-in.php:676
+msgid "Settings saved to memo."
+msgstr "メモを保存しました。"
+
+#: custom-options-plus-post-in.php:789
 msgid "\"Category name\" is duplicated."
 msgstr "カテゴリ名が重複しています。"
 
-#: inc/setting.php:16
+#: inc/setting.php:17
 msgid "Are you sure you want to bulk action?"
 msgstr "本当に一括変更してもよろしいですか？"
 
-#: inc/setting.php:23
-#: inc/setting.php:346
+#: inc/setting.php:24
+#: inc/setting.php:350
 msgid "Please create custom options."
 msgstr "カスタムオプションを作成してください。"
 
-#: inc/setting.php:32
-#: inc/setting.php:38
+#: inc/setting.php:33
+#: inc/setting.php:39
 msgid "Edit to Memo"
 msgstr "メモを編集"
 
-#: inc/setting.php:34
+#: inc/setting.php:35
 msgid "Use of Memo"
 msgstr "メモを使う"
 
-#: inc/setting.php:41
+#: inc/setting.php:42
 msgid "Please use it as reminder for your manage."
 msgstr "管理しやすくなるようにメモをご利用ください。"
 
-#: inc/setting.php:58
+#: inc/setting.php:60
 msgid "Add New Custom Option"
 msgstr "オプションを作成"
 
-#: inc/setting.php:75
-#: inc/setting.php:131
-#: inc/setting.php:174
+#: inc/setting.php:77
+#: inc/setting.php:133
+#: inc/setting.php:176
 msgid "Please enter a value that does not duplicated."
 msgstr "重複しない値を入力してください。"
 
-#: inc/setting.php:100
+#: inc/setting.php:102
 msgid "Usable Javascript and Html tag."
 msgstr "Javascript と HTMLタグ使用可能です。"
 
-#: inc/setting.php:156
+#: inc/setting.php:158
 msgid "Select the category for edit."
 msgstr "編集したいカテゴリを選択"
 
-#: inc/setting.php:168
+#: inc/setting.php:170
 msgid "Changed name"
 msgstr "変更後の名前"
 
-#: inc/setting.php:186
+#: inc/setting.php:188
 msgid "Not created category."
 msgstr "作成されたカテゴリーはありません"
 
-#: inc/setting.php:294
+#: inc/setting.php:204
+msgid "Have you want to customize?"
+msgstr "何かカスタマイズしたい事はありますか？"
+
+#: inc/setting.php:210
+msgid "I am good at Admin Screen Customize."
+msgstr "私は管理画面のカスタマイズを得意とします。"
+
+#: inc/setting.php:211
+msgid "Please consider the request to me if it is good."
+msgstr "宜しければご検討ください。"
+
+#: inc/setting.php:213
+msgid "Example Customize"
+msgstr "カスタマイズ例"
+
+#: inc/setting.php:214
+msgid "Contact me"
+msgstr "お問い合わせ"
+
+#: inc/setting.php:226
+#: inc/setting.php:238
+msgid "Please donate."
+msgstr "寄付のお願い"
+
+#: inc/setting.php:228
+msgid "The primary use of donations"
+msgstr "主な使用目的"
+
+#: inc/setting.php:230
+msgid "Liquidation of time and value"
+msgstr "時間の清算"
+
+#: inc/setting.php:231
+msgid "Additional suggestions feature"
+msgstr "機能追加"
+
+#: inc/setting.php:232
+msgid "Maintain motivation"
+msgstr "モチベーション維持"
+
+#: inc/setting.php:233
+msgid "Ensure time as the father of Sunday"
+msgstr "日曜日の父親の時間の確保"
+
+#: inc/setting.php:242
+msgid "If you have already donated to."
+msgstr "既に寄付済みの方へ。"
+
+#: inc/setting.php:243
+msgid "Please enter the 'Donation delete key' that have been described in the 'Line Break First and End download page'."
+msgstr "'Line Break First and End ダウンロードページ'に記載されている'寄付削除キー'を入力してください。"
+
+#: inc/setting.php:246
+msgid "Donation delete key"
+msgstr "寄付削除キー"
+
+#: inc/setting.php:256
+msgid "About plugin"
+msgstr "プラグインについて"
+
+#: inc/setting.php:258
+msgid "Version checked"
+msgstr "動作確認済み"
+
+#: inc/setting.php:267
+msgid "Plugin's site"
+msgstr "プラグインのサイト"
+
+#: inc/setting.php:268
+msgid "Developer's site"
+msgstr "開発者のサイト"
+
+#: inc/setting.php:270
+msgid "Reviews"
+msgstr "レビュー"
+
+#: inc/setting.php:278
+msgid "Useful plugins"
+msgstr "便利なプラグイン"
+
+#: inc/setting.php:281
+msgid "Customize a variety of screen management."
+msgstr "管理画面の様々なカスタマイズ"
+
+#: inc/setting.php:283
+msgid "Customize the list of the post and page. custom post type page, too. You can customize the column display items freely."
+msgstr "投稿と固定ページ一覧をカスタマイズします。カスタム投稿タイプも。カラム一覧を自由にカスタマイズできます。"
+
+#: inc/setting.php:285
+msgid "This Plugin is insert images in theme folder. Manipulated as easily as you would choose from Media Library."
+msgstr "テーマフォルダ内の画像を挿入できるプラグインです。メディアライブラリと同じように簡単に挿入できます。"
+
+#: inc/setting.php:296
 msgid "Custom options of created."
 msgstr "作成したカスタムオプション一覧"
 
-#: inc/setting.php:345
+#: inc/setting.php:349
 msgid "Not created option."
 msgstr "作成されたカスタムオプションはありません"
 
-#~ msgid ""
-#~ "This plugin is create to custom options in your WordPress. You can use in "
-#~ "the Template and Shortcode."
-#~ msgstr ""
-#~ "カスタムオプションを作成するプラグインです。テンプレートとショートコードで"
-#~ "利用できます。"

@@ -15,28 +15,111 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 
-	// delete 
-	$("a.delete" , $UpdateTable ).click(function() {
-		var $ConfDlg = $("#Confirm #ConfirmSt" , $UpdateTable );
+	// update line
+	$(document).on("submit", 'form[name=save_line]', function () {
 
-		var $DelUrl = $(this).attr("href");
-		$( "a#deletebtn" , $ConfDlg ).attr( "href" , $DelUrl );
+		if( coppi.UPFN = 'Y' ) {
+
+			var $SaveLineTr = $(this).parent().parent().parent();
+			$SaveLineTr.children(".operation").find(".spinner").show();
+			
+			var PostData = {
+				action: 'coppi_update_line',
+				nonce: $("input[name=_wpnonce]", this).val(),
+				UPFN: 'Y',
+				data: {
+					option_id:    $("input[name='data[update][option_id]']", this).val(),
+					option_name:  $SaveLineTr.children(".option_name").find("input[name='data[update][option_name]']").val(),
+					cat_id:       $SaveLineTr.children(".option_name").find("select[name='data[update][cat_id]'] :selected").val(),
+					option_value: $SaveLineTr.children(".option_value").find("textarea[name='data[update][option_value]']").val()
+				}
+			};
+			
+			$.post(coppi.ajax_url, PostData, function( response ) {
+				if( typeof( response ) != 'string' && !response.success ) {
+					
+					$dialog = $('<div id="dialog" />').html( '<div style="padding: 0 20px;">' + response.data.msg + '</div>' ).appendTo("body");
+					
+					$dialog.dialog({
+						dialogClass  : 'wp-dialog',
+						modal        : true,
+						autoOpen     : false,
+						closeOnEscape: true,
+						text         : 'closings',
+						class        : 'primary',
+						resizable    : false,
+						width        : 320,
+						height       : 'auto',
+						zIndex       : 300000,
+						title        : 'Error',
+						buttons: {
+							Close: function() {
+								$( this ).dialog( "close" );
+							}
+						}
+					}).dialog('open');
+					$SaveLineTr.children(".operation").find(".spinner").hide();
+					
+				} else {
+					$SaveLineTr.replaceWith( response );
+				}
+				
+			});
+		}
+		
+		return false;
+	});
+
+	// confirm 
+	$(document).on("click", '.update_table a.delete', function( $el ) {
+		
+		var DeleteID = $(this).parent().parent().parent().find("input[name='data[update][option_id]']").val();
+		var $ConfDlg = $("#Confirm #ConfirmSt");
 
 		var $DelName = $(this).parent().parent().parent().parent().children('td.option_name').children('div.on').text();
 		$( ".inner" , $ConfDlg ).children('p').children('strong').text( $DelName );
+		$( ".inner" , $ConfDlg ).find('input[name=delete_id]').val( DeleteID );
 
 		var $DelTitle = $(this).attr("title");
 		tb_show( $DelTitle , '#TB_inline?height=100&width=240&inlineId=Confirm' , '' );
 		
 		return false;
 	});
+	
+	// confirm delete
+	$(document).on("click", "#confirm_deletebtn", function( event ) {
 
-	$("a#cancelbtn").click(function() {
+		$(event.target).parent().parent().find(".spinner").show();
+		var DeleteID = $(this).parent().parent().find("input[name=delete_id]").val();
+		var PostData = {
+			action: 'coppi_delete_line',
+			nonce: $(this).parent().parent().find("input[name=_wpnonce]").val(),
+			data: {
+				option_id: DeleteID
+			}
+		};
+
+		$.post(coppi.ajax_url, PostData, function( response ) {
+			if( typeof( response ) != 'string' && response.success ) {
+					
+				$(event.target).parent().parent().find(".spinner").hide();
+				tb_remove();
+				$(".update_table", document).find("tr[id=tr_" + DeleteID + "]").slideUp();
+				
+			}
+			
+		});
+
+		return false;
+	});
+
+	// delete cancel
+	$(document).on("click", "a#cancelbtn", function() {
 		tb_remove();
 	});
 
 	// edit
-	$( "a.edit" , $UpdateTr ).click(function() {
+	$(document).on("click", '.update_table a.edit', function () {
 		var $ParentTr = $(this).parent().parent().parent().parent();
 		$ParentTr.children("td").each(function() {
 			if( 0 < $(".on" , this).size() ) {

@@ -1,10 +1,10 @@
 === CUSTOM OPTIONS PLUS POST IN ===
 Contributors: gqevu6bsiz
-Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_3_1
+Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_3_2
 Tags: admin, option, shortcode, post, custom, template
-Requires at least: 3.4.2
-Tested up to: 3.6
-Stable tag: 1.3.1
+Requires at least: 3.5
+Tested up to: 3.7.1
+Stable tag: 1.3.2
 License: GPL2
 
 This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
@@ -46,6 +46,11 @@ If you create a lot of options, You can manage the category for custom options.
 6. Display Example
 
 == Changelog ==
+
+= 1.3.2 =
+* Added: Changed to Ajax how to update for Update and Delete.
+* Fixed bug: Changed the data submit of category.
+* Fixed bug: Submit to process in the case empty of data.
 
 = 1.3.1 =
 * Fixed bug: Database Upgrade.
