@@ -3,7 +3,7 @@ Contributors: gqevu6bsiz
 Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_3_2
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.5
-Tested up to: 3.7.1
+Tested up to: 3.9
 Stable tag: 1.3.2
 License: GPL2
 
