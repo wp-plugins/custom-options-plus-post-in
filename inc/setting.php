@@ -255,7 +255,7 @@ wp_localize_script( $this->PageSlug , $this->PageSlug , $translation_array );
 			<div class="stuffbox" id="aboutbox">
 				<h3><span class="hndle"><?php _e( 'About plugin' , $this->ltd ); ?></span></h3>
 				<div class="inside">
-					<p><?php _e( 'Version checked' , $this->ltd ); ?> : 3.5.2 - 3.7.1</p>
+					<p><?php _e( 'Version checked' , $this->ltd ); ?> : 3.5.2 - 3.9.2</p>
 
 					<?php $moFile = $this->TransFileCk(); ?>
 					<?php if( !$moFile ) : ?>
