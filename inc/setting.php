@@ -79,7 +79,7 @@ wp_localize_script( $this->PageSlug , $this->PageSlug , $translation_array );
 								</tr>
 								<tr>
 									<th>
-										<label for="create_option_cat"><?php _e( 'Category' ); ?></label>
+										<label for="create_option_cat"><?php _e( 'Categories' ); ?></label>
 									</th>
 									<td>
 										<select name="data[<?php echo $field; ?>][cat_id]">
