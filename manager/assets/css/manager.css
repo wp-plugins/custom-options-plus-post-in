@@ -1,0 +1,85 @@
+.wrap.coppi .columns-2 {
+	margin-right: 360px;
+}
+.wrap.coppi .columns-2 #postbox-container-1 {
+	float: right;
+	width: 340px;
+	margin-right: -360px;
+}
+.wrap.coppi .columns-2 #postbox-container-2 {
+	width: 100%;
+}
+
+.wrap.coppi .columns-2.full-width {
+	margin-right: 120px;
+}
+.wrap.coppi .columns-2.full-width #postbox-container-1 {
+	width: 80px;
+	margin-right: -100px;
+}
+.wrap.coppi .columns-2 .postbox-container .postbox .hndle {
+	cursor: default; 	
+}
+.wrap.coppi .columns-2.full-width #postbox-container-1 .stuffbox {
+	display: none;
+}
+.wrap.coppi .columns-2.full-width #postbox-container-1 .donated_message {
+	display: none;
+}
+
+
+
+.wrap.coppi .columns-2 .memo_show {
+	padding: 10px;
+	background-color: #fffbcc;
+	border: 1px solid #e6db55;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+.wrap.coppi .columns-2 #edit_memo,
+.wrap.coppi .columns-2 #add_custom_option,
+.wrap.coppi .columns-2 #add_categories,
+.wrap.coppi .columns-2 #update_categories,
+.list_categories .list-options,
+.list_categories .list-options .bulk_change_cat,
+.list_categories .list-options .edit,
+.list_categories .list-options .saved_notice,
+#Confirm {
+	display: none;
+}
+
+
+.list_categories {
+	margin-bottom: 40px;
+}
+.list_categories .list-options.active {
+	display: block;
+}
+.list-options .wp-list-table thead th.create_date {
+	width: 10%;
+	vertical-align: middle;
+	text-align: center;
+}
+.list-options .wp-list-table thead th.option_name {
+	width: 20%;
+}
+.list-options .wp-list-table thead th.template_tag {
+	width: 20%;
+}
+.list-options .wp-list-table thead th.shortcode {
+	width: 20%;
+}
+.list-options .wp-list-table thead th.operation {
+	width: 10%;
+}
+
+
+.list-options .wp-list-table tbody tr.saved th,
+.list-options .wp-list-table tbody tr.saved td {
+	background-color: #fffbcc;
+}
+.list-options .wp-list-table tbody tr.saved .saved_notice {
+	display: block;
+}
