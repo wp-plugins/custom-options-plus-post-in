@@ -3,9 +3,9 @@
 Plugin Name: Custom Options Plus Post In
 Description: This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
 Plugin URI: http://wordpress.org/plugins/custom-options-plus-post-in/
-Version: 1.4
+Version: 1.4.1
 Author: gqevu6bsiz
-Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_4
+Author URI: http://gqevu6bsiz.chicappa.jp/?utm_source=use_plugin&utm_medium=list&utm_content=coppi&utm_campaign=1_4_1
 Text Domain: coppi
 Domain Path: /languages
 */
@@ -34,7 +34,7 @@ final class Coppi
 {
 
 	public $name = 'Custom Options Plus Post In';
-	public $ver = '1.4';
+	public $ver = '1.4.1';
 
 	private $plugin_dir;
 

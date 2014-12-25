@@ -1,10 +1,10 @@
 === CUSTOM OPTIONS PLUS POST IN ===
 Contributors: gqevu6bsiz
-Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_4
+Donate link: http://gqevu6bsiz.chicappa.jp/please-donation/?utm_source=wporg&utm_medium=donate&utm_content=coppi&utm_campaign=1_4_1
 Tags: admin, option, shortcode, post, custom, template
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPL2
 
 This plugin is create to custom options in your WordPress. You can use in the Template and Shortcode.
@@ -46,6 +46,9 @@ If you create a lot of options, You can manage the category for custom options.
 6. Display Example
 
 == Changelog ==
+
+= 1.4.1 =
+* Fixed: Change to get the current user role.
 
 = 1.4 =
 * Updated: Specification changes of Multisite environment.

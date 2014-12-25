@@ -140,7 +140,6 @@ final class Coppi_Init
 		$this->User->user_id            = false;
 		$this->User->superadmin         = false;
 		$this->User->is_manager         = false;
-		$this->User->is_network_manager = false;
 
 		if( !$this->User->user_login )
 			return false;
@@ -151,7 +150,9 @@ final class Coppi_Init
 	
 		if( !empty( $User->roles ) ) {
 	
-			foreach( $User->roles as $role ) {
+			$user_roles = $User->roles;
+
+			foreach( $user_roles as $role ) {
 	
 				$this->User->user_role = $role;
 				break;
